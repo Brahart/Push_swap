@@ -1,30 +1,28 @@
 #include "../../include/push_swap.h"
 
-void	swap_a(t_pile **a)
+void	swap_a(t_pile **pile_a)
 {
 	int	tmp;
-	if ((*a)->value && (*a)->next->value)
+	if ((*pile_a)->value && (*pile_a)->next->value)
 	{
-		tmp = (*a)->value;
-		(*a)->value = (*a)->next->value;
-		(*a)->next->value = tmp;
+		tmp = (*pile_a)->value;
+		(*pile_a)->value = (*pile_a)->next->value;
+		(*pile_a)->next->value = tmp;
 	}
-	else
-		return ;
+	write(1, "sa\n", 3);
 }
 
-void	swap_a(t_pile **b)
+void	swap_a(t_pile **pile_b)
 {
 	int	tmp;
 
-	if ((*b)->value && (*b)->next->value)
+	if ((*pile_b)->value && (*pile_b)->next->value)
 	{
-		tmp = (*b)->value;
-		(*b)->value = (*b)->next->value;
-		(*b)->next->value = tmp;
+		tmp = (*pile_b)->value;
+		(*pile_b)->value = (*pile_b)->next->value;
+		(*pile_b)->next->value = tmp;
 	}
-	else
-		return ;
+	write(1, "sb\n", 3);
 }
 
 void	swap_ss(t_pile **a, t_pile **b)
