@@ -1,14 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push.c                                             :+:      :+:    :+:   */
+/*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/17 12:55:19 by asinsard          #+#    #+#             */
-/*   Updated: 2025/01/17 15:09:57 by asinsard         ###   ########lyon.fr   */
+/*   Created: 2024/11/18 18:18:13 by asinsard          #+#    #+#             */
+/*   Updated: 2024/12/11 21:19:08 by asinsard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/push_swap.h"
+#include "../include/libft.h"
 
+int	ft_lstsize(t_list *lst)
+{
+	int	len;
+
+	len = 0;
+	while (lst)
+	{
+		lst = lst->next;
+		len++;
+	}
+	return (len);
+}

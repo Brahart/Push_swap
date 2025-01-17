@@ -1,14 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push.c                                             :+:      :+:    :+:   */
+/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/17 12:55:19 by asinsard          #+#    #+#             */
-/*   Updated: 2025/01/17 15:09:57 by asinsard         ###   ########lyon.fr   */
+/*   Created: 2024/11/18 18:18:06 by asinsard          #+#    #+#             */
+/*   Updated: 2024/12/11 21:19:06 by asinsard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/push_swap.h"
+#include "../include/libft.h"
 
+t_list	*ft_lstnew(void *content)
+{
+	t_list	*s;
+
+	s = malloc(sizeof(t_list));
+	if (!s)
+		return (NULL);
+	s->content = content;
+	s->next = NULL;
+	return (s);
+}
