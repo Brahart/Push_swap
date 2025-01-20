@@ -6,7 +6,7 @@
 /*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:55:16 by asinsard          #+#    #+#             */
-/*   Updated: 2025/01/17 16:36:01 by asinsard         ###   ########lyon.fr   */
+/*   Updated: 2025/01/20 15:58:27 by asinsard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,17 @@ void	swap_a(t_pile **pile_a);
 void	swap_b(t_pile **pile_b);
 void	swap_ss(t_pile **pile_a, t_pile **pile_b);
 
+/* ----------PUSH---------- */
+
+/* ---------ROTATE--------- */
+
+/* ---------REVERSE-------- */
+
 /* ---------------SOURCE-------------- */
 t_pile	*add_new_node(int value);
 t_pile	*add_back(t_pile *head, int value);
 void	display_list(t_pile *head);
 void	free_list(t_pile *head);
+int	add_to_list(t_pile **pile, int nbr);
 
 #endif
