@@ -6,17 +6,17 @@
 /*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 15:10:30 by asinsard          #+#    #+#             */
-/*   Updated: 2025/01/22 01:03:29 by asinsard         ###   ########lyon.fr   */
+/*   Updated: 2025/01/22 16:38:45 by asinsard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
 
-t_pile	*add_new_node(int value)
+t_stack	*add_new_node(int value)
 {
-	t_pile	*new_node;
+	t_stack	*new_node;
 
-	new_node = malloc(sizeof(t_pile));
+	new_node = malloc(sizeof(t_stack));
 	if (!new_node)
 		return (NULL);
 	new_node->value = value;
@@ -25,10 +25,10 @@ t_pile	*add_new_node(int value)
 	return (new_node);
 }
 
-void	add_to_list(t_pile **head, int value)
+void	add_to_list(t_stack **head, int value)
 {
-	t_pile	*new_node;
-	t_pile	*tmp;
+	t_stack	*new_node;
+	t_stack	*tmp;
 
 	new_node = add_new_node(value);
 	if ((*head) == NULL)
@@ -47,9 +47,9 @@ void	add_to_list(t_pile **head, int value)
 	(*head)->prev = new_node;
 }
 
-void	display_list(t_pile *head, const char *str)
+void	display_list(t_stack *head, const char *str)
 {
-	t_pile	*tmp;
+	t_stack	*tmp;
 	int		i;
 
 	i = 1;
@@ -67,10 +67,10 @@ void	display_list(t_pile *head, const char *str)
 	ft_printf(" [...]\n");
 }
 
-void	free_list(t_pile *head)
+void	free_list(t_stack *head)
 {
-	t_pile	*tmp;
-	t_pile	*next_node;
+	t_stack	*tmp;
+	t_stack	*next_node;
 
 	if (!head)
 		return ;

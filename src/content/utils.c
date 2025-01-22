@@ -6,7 +6,7 @@
 /*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 14:57:57 by asinsard          #+#    #+#             */
-/*   Updated: 2025/01/22 01:48:48 by asinsard         ###   ########lyon.fr   */
+/*   Updated: 2025/01/22 19:45:06 by asinsard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_error(const char *str)
 {
-	ft_printf("\e[1;31m%s\n", str);
+	ft_printf("\e[1;31m%s\e[0m\n", str);
 }
 
 char	**check_arg(char *str)
@@ -30,12 +30,12 @@ char	**check_arg(char *str)
 			|| (str[i] <= '9'))
 			i++;
 		else
-			return NULL;
+			return (NULL);
 	}
 	i = 0;
 	array = ft_split(str, ' ');
 	if (!array)
-		return NULL;
+		return (NULL);
 	return (array);
 }
 
@@ -51,4 +51,19 @@ void	free_split(char **split)
 		i++;
 	}
 	free(split);
+}
+
+int	stack_size(t_stack **stack)
+{
+	int		len;
+	t_stack	*tmp;
+
+	len = 1; 
+	tmp = (*stack);
+	while (tmp->next != (*stack))
+	{
+		tmp = tmp->next;
+		len++;
+	}
+	return (len);
 }

@@ -6,7 +6,7 @@
 /*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 16:10:07 by asinsard          #+#    #+#             */
-/*   Updated: 2025/01/21 17:31:09 by asinsard         ###   ########lyon.fr   */
+/*   Updated: 2025/01/22 16:38:07 by asinsard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ long int	ft_atol(const char *nptr)
 	return (n * neg);
 }
 
-int	check_atol(char *nbr, t_pile *list)
+int	check_atol(char *nbr, t_stack *list)
 {
 	long int	i;
 

@@ -6,30 +6,30 @@
 /*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:55:22 by asinsard          #+#    #+#             */
-/*   Updated: 2025/01/21 19:38:53 by asinsard         ###   ########lyon.fr   */
+/*   Updated: 2025/01/22 16:39:29 by asinsard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
 
-void	reverse_rotate_a(t_pile **pile_a)
+void	reverse_rotate_a(t_stack **stack_a)
 {
-	if (!pile_a || !(*pile_a) || (*pile_a)->next == *pile_a)
+	if (!stack_a || !(*stack_a) || (*stack_a)->next == *stack_a)
 		return ;
-	(*pile_a) = (*pile_a)->prev;
+	(*stack_a) = (*stack_a)->prev;
 	ft_printf("ra\n");
 }
 
-void	reverse_rotate_b(t_pile **pile_b)
+void	reverse_rotate_b(t_stack **stack_b)
 {
-	if (!pile_b || !(*pile_b) || (*pile_b)->next == *pile_b)
+	if (!stack_b || !(*stack_b) || (*stack_b)->next == *stack_b)
 		return ;
-	(*pile_b) = (*pile_b)->prev;
+	(*stack_b) = (*stack_b)->prev;
 	ft_printf("rb\n");
 }
 
-void	reverse_rotate_rr(t_pile **pile_a, t_pile **pile_b)
+void	reverse_rotate_rr(t_stack **stack_a, t_stack **stack_b)
 {
-	reverse_rotate_a(pile_a);
-	reverse_rotate_b(pile_b);
+	reverse_rotate_a(stack_a);
+	reverse_rotate_b(stack_b);
 }

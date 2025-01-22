@@ -15,8 +15,10 @@ LIB_LIBFT 	= $(LIBFT_DIR)libft.a
 LIBFT_FLAGS	= -L$(LIBFT_DIR) $(LIB_LIBFT)
 
 SRC_DIR 	= src/
-SRC_FILE 	=	algo/test.c \
+SRC_FILE 	=	algo/parsing.c \
+				algo/test.c \
 				content/atoi.c \
+				content/check_sort.c \
 				content/create_list.c \
 				content/main.c \
 				content/utils.c \

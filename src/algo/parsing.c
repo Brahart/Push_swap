@@ -1,35 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate.c                                           :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/17 15:09:22 by asinsard          #+#    #+#             */
-/*   Updated: 2025/01/22 16:39:37 by asinsard         ###   ########lyon.fr   */
+/*   Created: 2025/01/22 19:46:00 by asinsard          #+#    #+#             */
+/*   Updated: 2025/01/22 19:51:09 by asinsard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
 
-void	rotate_a(t_stack **stack_a)
+int	check_double(t_stack **stack)
 {
-	if (!stack_a || !(*stack_a) || (*stack_a)->next == *stack_a)
-		return ;
-	(*stack_a) = (*stack_a)->next;
-	ft_printf("ra\n");
-}
+	t_stack	*tmp;
+	t_stack	*runner;
 
-void	rotate_b(t_stack **stack_b)
-{
-	if (!stack_b || !(*stack_b) || (*stack_b)->next == *stack_b)
-		return ;
-	(*stack_b) = (*stack_b)->next;
-	ft_printf("rb\n");
-}
-
-void	rotate_rr(t_stack **stack_a, t_stack **stack_b)
-{
-	rotate_a(stack_a);
-	rotate_b(stack_b);
+	if (!(*stack) || (*stack)->next == (*stack))
+		return (0);
+	tmp = (*stack);
+	while (tmp->next != (*stack))
+	{
+		runner = tmp->next;
+		while (runner != (*stack))
+		{
+			if (tmp->value == runner->value)
+				return (1);
+			runner = runner->next;
+		}
+		tmp = tmp->next;
+	}
+	return (0);
 }

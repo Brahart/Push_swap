@@ -6,58 +6,60 @@
 /*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:55:19 by asinsard          #+#    #+#             */
-/*   Updated: 2025/01/22 01:03:56 by asinsard         ###   ########lyon.fr   */
+/*   Updated: 2025/01/22 19:02:14 by asinsard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
 
-void	push_to_a(t_pile **pile_a, t_pile **pile_b)
+void	push_to_a(t_stack **stack_a, t_stack **stack_b)
 {
-	t_pile *head;
-	
-	if (!pile_b || !(*pile_b))
+	t_stack	*head;
+
+	if (!stack_b || !(*stack_b))
 		return ;
-	head = *pile_b;
-	if ((*pile_b)->next == *pile_b)
-		*pile_b = NULL;
-	*pile_b = (*pile_b)->next;
-	(*pile_b)->prev = head->prev;
-	head->prev->next = *pile_b;
-	if (!*pile_a)
+	head = (*stack_b);
+	if ((*stack_b)->next == (*stack_b))
+		(*stack_b) = NULL;
+	(*stack_b) = (*stack_b)->next;
+	(*stack_b)->prev = head->prev;
+	head->prev->next = (*stack_b);
+	if (!(*stack_a))
 	{
-		*pile_a = head;
+		(*stack_a) = head;
 		head->next = head;
 		head->prev = head;
 	}
-	head->next = *pile_a;
-	head->prev = (*pile_a)->prev;
-	(*pile_a)->prev->next = head;
-	(*pile_a)->prev = head;
-	*pile_a = head;
+	head->next = (*stack_a);
+	head->prev = (*stack_a)->prev;
+	(*stack_a)->prev->next = head;
+	(*stack_a)->prev = head;
+	(*stack_a) = head;
+	ft_printf("pa\n");
 }
 
-void	push_to_b(t_pile **pile_a, t_pile **pile_b)
+void	push_to_b(t_stack **stack_a, t_stack **stack_b)
 {
-	t_pile *head;
+	t_stack	*head;
 
-	if (!pile_a || !(*pile_a))
+	if (!stack_a || !(*stack_a))
 		return ;
-	head = *pile_a;
-	if ((*pile_a)->next == *pile_a)
-		*pile_a = NULL;
-	*pile_a = (*pile_a)->next;
-	(*pile_a)->prev = head->prev;
-	head->prev->next = *pile_a;
-	if (!*pile_b)
+	head = (*stack_a);
+	if ((*stack_a)->next == (*stack_a))
+		(*stack_a) = NULL;
+	(*stack_a) = (*stack_a)->next;
+	(*stack_a)->prev = head->prev;
+	head->prev->next = (*stack_a);
+	if (!(*stack_b))
 	{
-		*pile_b = head;
+		(*stack_b) = head;
 		head->next = head;
 		head->prev = head;
 	}
-	head->next = *pile_b;
-	head->prev = (*pile_b)->prev;
-	(*pile_b)->prev->next = head;
-	(*pile_b)->prev = head;
-	*pile_b = head;
+	head->next = (*stack_b);
+	head->prev = (*stack_b)->prev;
+	(*stack_b)->prev->next = head;
+	(*stack_b)->prev = head;
+	(*stack_b) = head;
+	ft_printf("pb\n");
 }
