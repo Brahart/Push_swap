@@ -6,7 +6,7 @@
 /*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:55:26 by asinsard          #+#    #+#             */
-/*   Updated: 2025/01/17 13:20:54 by asinsard         ###   ########lyon.fr   */
+/*   Updated: 2025/01/21 17:59:40 by asinsard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,14 @@
 void	swap_a(t_pile **pile_a)
 {
 	int	tmp;
+	
 	if ((*pile_a)->value && (*pile_a)->next->value)
 	{
 		tmp = (*pile_a)->value;
 		(*pile_a)->value = (*pile_a)->next->value;
 		(*pile_a)->next->value = tmp;
 	}
-	write(1, "sa\n", 3);
+	ft_printf("sa\n");
 }
 
 void	swap_b(t_pile **pile_b)
@@ -34,7 +35,7 @@ void	swap_b(t_pile **pile_b)
 		(*pile_b)->value = (*pile_b)->next->value;
 		(*pile_b)->next->value = tmp;
 	}
-	write(1, "sb\n", 3);
+	ft_printf("sb\n");
 }
 
 void	swap_ss(t_pile **pile_a, t_pile **pile_b)

@@ -6,7 +6,7 @@
 /*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 15:10:30 by asinsard          #+#    #+#             */
-/*   Updated: 2025/01/17 16:44:00 by asinsard         ###   ########lyon.fr   */
+/*   Updated: 2025/01/22 01:03:29 by asinsard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_pile	*add_new_node(int value)
 {
 	t_pile	*new_node;
 
-	new_node = malloc(sizeof(t_list));
+	new_node = malloc(sizeof(t_pile));
 	if (!new_node)
 		return (NULL);
 	new_node->value = value;
@@ -25,53 +25,63 @@ t_pile	*add_new_node(int value)
 	return (new_node);
 }
 
-t_pile	*add_back(t_pile *head, int value)
+void	add_to_list(t_pile **head, int value)
 {
 	t_pile	*new_node;
 	t_pile	*tmp;
-	
+
 	new_node = add_new_node(value);
-	if (head == NULL)
-		return (new_node);
-	tmp = head;
-	while (tmp->next)
+	if ((*head) == NULL)
+	{
+		(*head) = new_node;
+		(*head)->next = (*head);
+		(*head)->prev = (*head);
+		return ;
+	}
+	tmp = (*head);
+	while (tmp->next != (*head))
 		tmp = tmp->next;
 	tmp->next = new_node;
 	new_node->prev = tmp;
-	return (head);
+	new_node->next = (*head);
+	(*head)->prev = new_node;
 }
 
-void	display_list(t_pile *head)
+void	display_list(t_pile *head, const char *str)
 {
 	t_pile	*tmp;
 	int		i;
-	
+
 	i = 1;
 	tmp = head;
-	ft_printf("liste dans le bon sens :\n");
-	while (tmp)
+	ft_printf("liste : %s\n", str);
+	while (tmp->next != head)
 	{
-		ft_printf("NODE %d\n[%d]\n |\n v\n", i, tmp->value);
+		ft_printf(" NODE %d\n  [%d]\n   |\n   v\n", i, tmp->value);
 		tmp = tmp->next;
 		i++;
 	}
-	ft_printf("END\n");
+	ft_printf(" NODE %d\n  [%d]\n   |\n   v\n", i, tmp->value);
+	tmp = tmp->next;
+	ft_printf(" NODE 1\n  [%d]\n   |\n   v\n", tmp->value);
+	ft_printf(" [...]\n");
 }
 
-
-/* PAS BONNE FONCTON, LEAK */
 void	free_list(t_pile *head)
 {
 	t_pile	*tmp;
-	
+	t_pile	*next_node;
+
+	if (!head)
+		return ;
 	tmp = head;
 	if (!tmp)
 		return ;
-	while (tmp)
+	while (tmp->next != head)
 	{
-		tmp->value = 0;
+		next_node = tmp->next;
 		free(tmp);
-		tmp = tmp->next;
+		tmp = next_node;
 	}
 	free(tmp);
 }

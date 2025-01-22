@@ -15,8 +15,11 @@ LIB_LIBFT 	= $(LIBFT_DIR)libft.a
 LIBFT_FLAGS	= -L$(LIBFT_DIR) $(LIB_LIBFT)
 
 SRC_DIR 	= src/
-SRC_FILE 	=	content/create_list.c \
+SRC_FILE 	=	algo/test.c \
+				content/atoi.c \
+				content/create_list.c \
 				content/main.c \
+				content/utils.c \
 				move/push.c \
 				move/reverse.c \
 				move/rotate.c \
