@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: abrahamsinsard <abrahamsinsard@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:55:26 by asinsard          #+#    #+#             */
-/*   Updated: 2025/01/22 19:02:32 by asinsard         ###   ########lyon.fr   */
+/*   Updated: 2025/01/24 15:05:20 by abrahamsins      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,5 @@ void	swap_ss(t_stack **stack_a, t_stack **stack_b)
 {
 	swap_a(stack_a);
 	swap_b(stack_b);
+	ft_printf("ss\n");
 }

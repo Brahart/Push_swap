@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: abrahamsinsard <abrahamsinsard@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:55:16 by asinsard          #+#    #+#             */
-/*   Updated: 2025/01/24 03:05:18 by asinsard         ###   ########lyon.fr   */
+/*   Updated: 2025/01/24 16:23:35 by abrahamsins      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ typedef struct s_index
 
 typedef struct s_stack
 {
-	int				value;
 	struct s_stack	*prev;
 	struct s_stack	*next;
-	t_index			index;
+	int				value;
+	int				index;
 }	t_stack;
 
 
@@ -48,10 +48,12 @@ void	push_to_b(t_stack **stack_a, t_stack **stack_b);
 /* ---------ROTATE--------- */
 void	rotate_a(t_stack **stack_a);
 void	rotate_b(t_stack **stack_b);
+void	rotate_rr(t_stack **stack_a, t_stack **stack_b);
 
 /* ---------REVERSE-------- */
 void	reverse_rotate_a(t_stack **stack_a);
 void	reverse_rotate_b(t_stack **stack_b);
+void	reverse_rotate_rr(t_stack **stack_a, t_stack **stack_b);
 
 /* ---------------SOURCE-------------- */
 t_stack	*add_new_node(int value);
@@ -60,7 +62,7 @@ void	display_list(t_stack *head, const char *str);
 void	free_list(t_stack *head);
 void	add_to_list(t_stack **head, int value);
 int		check_atol(char *nbr, t_stack *list);
-int		check_is_sorted(t_stack **stack);
+int		check_is_sorted(t_stack *stack);
 
 /* --------PARSING-------- */
 int		check_double(t_stack **stack);
@@ -75,9 +77,31 @@ int		stack_max(t_stack *stack);
 int		stack_size(t_stack *stack);
 int		stack_last(t_stack *stack);
 
+/* -------ALGO UTILS------- */
+int	calc_rarb_a(t_stack *stack_a, t_stack *stack_b, int value);
+int	calc_rrarb_a(t_stack *stack_a, t_stack *stack_b, int value);
+int calc_rarrb_a(t_stack *stack_a, t_stack *stack_b, int value);
+int	calc_rrarrb_a(t_stack *stack_a, t_stack *stack_b, int value);
+
+int	calc_rarb_b(t_stack *stack_a, t_stack *stack_b, int value);
+int	calc_rrarb_b(t_stack *stack_a, t_stack *stack_b, int value);
+int calc_rarrb_b(t_stack *stack_a, t_stack *stack_b, int value);
+int	calc_rrarrb_b(t_stack *stack_a, t_stack *stack_b, int value);
+
+int	rotate_type_ba(t_stack *stack_a, t_stack *stack_b);
+int	rotate_type_ab(t_stack *stack_a, t_stack *stack_b);
+
+int	move_rarb(t_stack **stack_a, t_stack **stack_b, int value, char c);
+int	move_rrarb(t_stack **stack_a, t_stack **stack_b, int value, char c);
+int	move_rarrb(t_stack **stack_a, t_stack **stack_b, int value, char c);
+int	move_rrarrb(t_stack **stack_a, t_stack **stack_b, int value, char c);
+
 /* ---------UTILS--------- */
 void	ft_error(const char *str);
 char	**check_arg(char *str);
 void	free_split(char **split);
+int		find_place_in_a(t_stack *stack_a, int push_value);
+int		find_place_in_b(t_stack *stack_b, int push_value);
+int		find_index(t_stack *stack, int value);
 
 #endif

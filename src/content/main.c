@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: abrahamsinsard <abrahamsinsard@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 14:07:25 by asinsard          #+#    #+#             */
-/*   Updated: 2025/01/24 01:25:27 by asinsard         ###   ########lyon.fr   */
+/*   Updated: 2025/01/24 16:43:24 by abrahamsins      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,9 @@ int	main(int ac, char **av)
 	int		j;
 	int		value;
 	t_stack	*stack_a;
-	t_stack	*stack_b;
 	char	**arg;
 
 	stack_a = NULL;
-	stack_b = NULL;
 	if (ac < 2)
 	{
 		ft_error("ERROR\nThe program need at least 1 argument");
@@ -43,17 +41,14 @@ int	main(int ac, char **av)
 		i++;
 	}
 	sort_three(&stack_a);
-	if (check_is_sorted(&stack_a))
+	if (check_is_sorted(stack_a))
 	{
 		free_list(stack_a);
 		if (ac == 2)
 			free_split(arg);
 		return(0);
 	}
-	// if (!check_double(&stack_a))
-	// 	algo_sort(&stack_a);
-	else
-		ft_error("ERROR\nThe stack contains double");
+	algo_sort(&stack_a);
 	if (ac == 2)
 		free_split(arg);
 	free_list(stack_a);

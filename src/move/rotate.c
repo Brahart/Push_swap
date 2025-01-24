@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: abrahamsinsard <abrahamsinsard@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 15:09:22 by asinsard          #+#    #+#             */
-/*   Updated: 2025/01/24 01:25:52 by asinsard         ###   ########lyon.fr   */
+/*   Updated: 2025/01/24 15:04:47 by abrahamsins      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,5 @@ void	rotate_rr(t_stack **stack_a, t_stack **stack_b)
 {
 	rotate_a(stack_a);
 	rotate_b(stack_b);
+	ft_printf("rr\n");
 }
