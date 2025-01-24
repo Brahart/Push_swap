@@ -6,7 +6,7 @@
 /*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:55:16 by asinsard          #+#    #+#             */
-/*   Updated: 2025/01/22 19:53:07 by asinsard         ###   ########lyon.fr   */
+/*   Updated: 2025/01/24 03:05:18 by asinsard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,19 @@ void	free_list(t_stack *head);
 void	add_to_list(t_stack **head, int value);
 int		check_atol(char *nbr, t_stack *list);
 int		check_is_sorted(t_stack **stack);
-int		stack_size(t_stack **stack);
 
 /* --------PARSING-------- */
-int	check_double(t_stack **stack);
+int		check_double(t_stack **stack);
 
 /* ----------ALGO--------- */
 void	algo_sort(t_stack **stack_a);
+void	sort_three(t_stack **stack);
+
+/* ------STACK_UTILS------ */
+int		stack_min(t_stack *stack);
+int		stack_max(t_stack *stack);
+int		stack_size(t_stack *stack);
+int		stack_last(t_stack *stack);
 
 /* ---------UTILS--------- */
 void	ft_error(const char *str);

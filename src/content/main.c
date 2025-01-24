@@ -6,7 +6,7 @@
 /*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 14:07:25 by asinsard          #+#    #+#             */
-/*   Updated: 2025/01/22 20:55:06 by asinsard         ###   ########lyon.fr   */
+/*   Updated: 2025/01/24 01:25:27 by asinsard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	main(int ac, char **av)
 {
 	int		i;
+	int		j;
 	int		value;
 	t_stack	*stack_a;
 	t_stack	*stack_b;
@@ -28,6 +29,7 @@ int	main(int ac, char **av)
 		return (0);
 	}
 	i = 1;
+	j = 0;
 	if (ac == 2)
 	{
 		arg = check_arg(av[1]);
@@ -40,6 +42,7 @@ int	main(int ac, char **av)
 		add_to_list(&stack_a, value);
 		i++;
 	}
+	sort_three(&stack_a);
 	if (check_is_sorted(&stack_a))
 	{
 		free_list(stack_a);
@@ -47,8 +50,8 @@ int	main(int ac, char **av)
 			free_split(arg);
 		return(0);
 	}
-	if (!check_double(&stack_a))
-		algo_sort(&stack_a);
+	// if (!check_double(&stack_a))
+	// 	algo_sort(&stack_a);
 	else
 		ft_error("ERROR\nThe stack contains double");
 	if (ac == 2)

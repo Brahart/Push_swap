@@ -15,17 +15,19 @@ LIB_LIBFT 	= $(LIBFT_DIR)libft.a
 LIBFT_FLAGS	= -L$(LIBFT_DIR) $(LIB_LIBFT)
 
 SRC_DIR 	= src/
-SRC_FILE 	=	algo/parsing.c \
-				algo/test.c \
+SRC_FILE 	=	algo/algorithm.c \
+				algo/parsing.c \
 				content/atoi.c \
 				content/check_sort.c \
 				content/create_list.c \
 				content/main.c \
+				content/stack_utils.c \
 				content/utils.c \
 				move/push.c \
 				move/reverse.c \
 				move/rotate.c \
 				move/swap.c
+
 SRC 		= $(addprefix $(SRC_DIR), $(SRC_FILE))
 
 OBJ			= $(SRC:%.c=%.o)

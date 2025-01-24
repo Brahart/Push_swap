@@ -6,7 +6,7 @@
 /*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 14:57:57 by asinsard          #+#    #+#             */
-/*   Updated: 2025/01/22 19:45:06 by asinsard         ###   ########lyon.fr   */
+/*   Updated: 2025/01/23 17:51:54 by asinsard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,19 +51,4 @@ void	free_split(char **split)
 		i++;
 	}
 	free(split);
-}
-
-int	stack_size(t_stack **stack)
-{
-	int		len;
-	t_stack	*tmp;
-
-	len = 1; 
-	tmp = (*stack);
-	while (tmp->next != (*stack))
-	{
-		tmp = tmp->next;
-		len++;
-	}
-	return (len);
 }
