@@ -29,7 +29,7 @@ int	rotate_type_ab(t_stack *stack_a, t_stack *stack_b)
 
 	tmp = stack_a;
 	i = calc_rarb_b(stack_a, stack_b, stack_a->value);
-	while (tmp->next != stack_b)
+	while (tmp->next != stack_a)
 	{
 		if (i > calc_rarrb_b(stack_a, stack_b, tmp->value))
 			i = calc_rarrb_b(stack_a, stack_b, tmp->value);

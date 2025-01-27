@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abrahamsinsard <abrahamsinsard@student.    +#+  +:+       +#+        */
+/*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 14:07:25 by asinsard          #+#    #+#             */
-/*   Updated: 2025/01/24 16:43:24 by abrahamsins      ###   ########lyon.fr   */
+/*   Updated: 2025/01/27 20:31:30 by asinsard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	main(int ac, char **av)
 		add_to_list(&stack_a, value);
 		i++;
 	}
-	sort_three(&stack_a);
 	if (check_is_sorted(stack_a))
 	{
 		free_list(stack_a);
