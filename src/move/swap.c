@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abrahamsinsard <abrahamsinsard@student.    +#+  +:+       +#+        */
+/*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:55:26 by asinsard          #+#    #+#             */
-/*   Updated: 2025/01/24 15:05:20 by abrahamsins      ###   ########lyon.fr   */
+/*   Updated: 2025/01/29 19:07:26 by asinsard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ void	swap_a(t_stack **stack_a)
 {
 	int	tmp;
 
-	if ((*stack_a)->value && (*stack_a)->next->value)
+	if ((*stack_a)->content && (*stack_a)->next->content)
 	{
-		tmp = (*stack_a)->value;
-		(*stack_a)->value = (*stack_a)->next->value;
-		(*stack_a)->next->value = tmp;
+		tmp = (*stack_a)->content;
+		(*stack_a)->content = (*stack_a)->next->content;
+		(*stack_a)->next->content = tmp;
 	}
 	ft_printf("sa\n");
 }
@@ -29,11 +29,11 @@ void	swap_b(t_stack **stack_b)
 {
 	int	tmp;
 
-	if ((*stack_b)->value && (*stack_b)->next->value)
+	if ((*stack_b)->content && (*stack_b)->next->content)
 	{
-		tmp = (*stack_b)->value;
-		(*stack_b)->value = (*stack_b)->next->value;
-		(*stack_b)->next->value = tmp;
+		tmp = (*stack_b)->content;
+		(*stack_b)->content = (*stack_b)->next->content;
+		(*stack_b)->next->content = tmp;
 	}
 	ft_printf("sb\n");
 }

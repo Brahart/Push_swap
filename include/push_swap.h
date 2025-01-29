@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abrahamsinsard <abrahamsinsard@student.    +#+  +:+       +#+        */
+/*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:55:16 by asinsard          #+#    #+#             */
-/*   Updated: 2025/01/24 16:23:35 by abrahamsins      ###   ########lyon.fr   */
+/*   Updated: 2025/01/29 18:58:44 by asinsard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_stack
 {
 	struct s_stack	*prev;
 	struct s_stack	*next;
-	int				value;
+	int				content;
 	int				index;
 }	t_stack;
 
@@ -76,32 +76,14 @@ int		stack_min(t_stack *stack);
 int		stack_max(t_stack *stack);
 int		stack_size(t_stack *stack);
 int		stack_last(t_stack *stack);
-
-/* -------ALGO UTILS------- */
-int	calc_rarb_a(t_stack *stack_a, t_stack *stack_b, int value);
-int	calc_rrarb_a(t_stack *stack_a, t_stack *stack_b, int value);
-int calc_rarrb_a(t_stack *stack_a, t_stack *stack_b, int value);
-int	calc_rrarrb_a(t_stack *stack_a, t_stack *stack_b, int value);
-
-int	calc_rarb_b(t_stack *stack_a, t_stack *stack_b, int value);
-int	calc_rrarb_b(t_stack *stack_a, t_stack *stack_b, int value);
-int calc_rarrb_b(t_stack *stack_a, t_stack *stack_b, int value);
-int	calc_rrarrb_b(t_stack *stack_a, t_stack *stack_b, int value);
-
-int	rotate_type_ba(t_stack *stack_a, t_stack *stack_b);
-int	rotate_type_ab(t_stack *stack_a, t_stack *stack_b);
-
-int	move_rarb(t_stack **stack_a, t_stack **stack_b, int value, char c);
-int	move_rrarb(t_stack **stack_a, t_stack **stack_b, int value, char c);
-int	move_rarrb(t_stack **stack_a, t_stack **stack_b, int value, char c);
-int	move_rrarrb(t_stack **stack_a, t_stack **stack_b, int value, char c);
+void	take_index(t_stack *stack);
+int		find_place_in_a(t_stack *a, int push_value);
+int		find_place_in_b(t_stack *b, int push_value);
 
 /* ---------UTILS--------- */
 void	ft_error(const char *str);
 char	**check_arg(char *str);
 void	free_split(char **split);
-int		find_place_in_a(t_stack *stack_a, int push_value);
-int		find_place_in_b(t_stack *stack_b, int push_value);
-int		find_index(t_stack *stack, int value);
+int		find_nbr_rotate(t_stack *stack, int value);
 
 #endif

@@ -17,15 +17,11 @@ LIBFT_FLAGS	= -L$(LIBFT_DIR) $(LIB_LIBFT)
 SRC_DIR 	= src/
 SRC_FILE 	=	algo/algorithm.c \
 				algo/parsing.c \
-				content/apply_moves.c \
 				content/atoi.c \
-				content/calculate_move_a.c \
-				content/calculate_move_b.c \
 				content/check_sort.c \
 				content/create_list.c \
 				content/main.c \
 				content/stack_find_nbr.c \
-				content/type_of_rotate.c \
 				content/stack_utils.c \
 				content/utils.c \
 				move/push.c \

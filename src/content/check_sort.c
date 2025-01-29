@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abrahamsinsard <abrahamsinsard@student.    +#+  +:+       +#+        */
+/*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 15:45:25 by asinsard          #+#    #+#             */
-/*   Updated: 2025/01/24 13:33:52 by abrahamsins      ###   ########lyon.fr   */
+/*   Updated: 2025/01/29 19:06:41 by asinsard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	check_is_sorted(t_stack *stack)
 	tmp = stack;
 	while (tmp->next != stack)
 	{
-		if (tmp->value > tmp->next->value)
+		if (tmp->content > tmp->next->content)
 			return (0);
 		tmp = tmp->next;
 	}

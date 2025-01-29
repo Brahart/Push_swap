@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abrahamsinsard <abrahamsinsard@student.    +#+  +:+       +#+        */
+/*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 17:40:25 by asinsard          #+#    #+#             */
-/*   Updated: 2025/01/24 14:02:04 by abrahamsins      ###   ########lyon.fr   */
+/*   Updated: 2025/01/29 19:07:04 by asinsard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	stack_size(t_stack *stack)
 	t_stack	*tmp;
 
 	len = 1;
+	if (!stack)
+		return (0);
 	tmp = stack;
 	while (tmp->next != stack)
 	{
@@ -33,15 +35,15 @@ int	stack_max(t_stack *stack)
 	t_stack	*tmp;
 
 	tmp = stack;
-	i = tmp->value;
+	i = tmp->content;
 	while (tmp->next != stack)
 	{
-		if (i < tmp->value)
-			i = tmp->value;
+		if (i < tmp->content)
+			i = tmp->content;
 		tmp = tmp->next;
 	}
-	if (i < tmp->value)
-		i = tmp->value;
+	if (i < tmp->content)
+		i = tmp->content;
 	return (i);
 }
 
@@ -51,15 +53,15 @@ int	stack_min(t_stack *stack)
 	t_stack	*tmp;
 
 	tmp = stack;
-	i = tmp->value;
+	i = tmp->content;
 	while (tmp->next != stack)
 	{
-		if (i > tmp->value)
-			i = tmp->value;
+		if (i > tmp->content)
+			i = tmp->content;
 		tmp = tmp->next;
 	}
-	if (i > tmp->value)
-		i = tmp->value;
+	if (i > tmp->content)
+		i = tmp->content;
 	return (i);
 }
 
@@ -71,7 +73,7 @@ int	stack_last(t_stack *stack)
 	tmp = stack;
 	while(tmp->next != stack)
 		tmp = tmp->next;
-	i = tmp->value;
+	i = tmp->content;
 	return (i);
 }
 

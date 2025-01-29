@@ -6,7 +6,7 @@
 /*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 15:10:30 by asinsard          #+#    #+#             */
-/*   Updated: 2025/01/22 16:38:45 by asinsard         ###   ########lyon.fr   */
+/*   Updated: 2025/01/29 15:38:07 by asinsard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_stack	*add_new_node(int value)
 	new_node = malloc(sizeof(t_stack));
 	if (!new_node)
 		return (NULL);
-	new_node->value = value;
+	new_node->content = value;
 	new_node->prev = NULL;
 	new_node->next = NULL;
 	return (new_node);
@@ -57,13 +57,13 @@ void	display_list(t_stack *head, const char *str)
 	ft_printf("liste : %s\n", str);
 	while (tmp->next != head)
 	{
-		ft_printf(" NODE %d\n  [%d]\n   |\n   v\n", i, tmp->value);
+		ft_printf(" NODE %d\n  [%d]-->index = %d\n   |\n   v\n", i, tmp->content, tmp->index);
 		tmp = tmp->next;
 		i++;
 	}
-	ft_printf(" NODE %d\n  [%d]\n   |\n   v\n", i, tmp->value);
+	ft_printf(" NODE %d\n  [%d]-->index = %d\n   |\n   v\n", i, tmp->content, tmp->index);
 	tmp = tmp->next;
-	ft_printf(" NODE 1\n  [%d]\n   |\n   v\n", tmp->value);
+	ft_printf(" NODE 1\n  [%d]-->index = %d\n   |\n   v\n", tmp->content, tmp->index);
 	ft_printf(" [...]\n");
 }
 

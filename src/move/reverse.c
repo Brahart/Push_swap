@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reverse.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abrahamsinsard <abrahamsinsard@student.    +#+  +:+       +#+        */
+/*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:55:22 by asinsard          #+#    #+#             */
-/*   Updated: 2025/01/24 15:04:54 by abrahamsins      ###   ########lyon.fr   */
+/*   Updated: 2025/01/29 00:12:08 by asinsard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	reverse_rotate_a(t_stack **stack_a)
 	if (!stack_a || !(*stack_a) || (*stack_a)->next == *stack_a)
 		return ;
 	(*stack_a) = (*stack_a)->prev;
-	ft_printf("ra\n");
+	ft_printf("rra\n");
 }
 
 void	reverse_rotate_b(t_stack **stack_b)
@@ -25,7 +25,7 @@ void	reverse_rotate_b(t_stack **stack_b)
 	if (!stack_b || !(*stack_b) || (*stack_b)->next == *stack_b)
 		return ;
 	(*stack_b) = (*stack_b)->prev;
-	ft_printf("rb\n");
+	ft_printf("rrb\n");
 }
 
 void	reverse_rotate_rr(t_stack **stack_a, t_stack **stack_b)

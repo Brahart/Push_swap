@@ -1,35 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   calc_move.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/22 19:46:00 by asinsard          #+#    #+#             */
-/*   Updated: 2025/01/29 19:06:24 by asinsard         ###   ########lyon.fr   */
+/*   Created: 2025/01/29 21:56:31 by asinsard          #+#    #+#             */
+/*   Updated: 2025/01/29 21:57:23 by asinsard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
 
-int	check_double(t_stack **stack)
+int	calc_rarb(t_stack *a, int value)
 {
-	t_stack	*tmp;
-	t_stack	*runner;
-
-	if (!(*stack) || (*stack)->next == (*stack))
-		return (0);
-	tmp = (*stack);
-	while (tmp->next != (*stack))
-	{
-		runner = tmp->next;
-		while (runner != (*stack))
-		{
-			if (tmp->content == runner->content)
-				return (1);
-			runner = runner->next;
-		}
-		tmp = tmp->next;
-	}
-	return (0);
+	
 }
