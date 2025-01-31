@@ -6,7 +6,7 @@
 /*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:55:16 by asinsard          #+#    #+#             */
-/*   Updated: 2025/01/29 18:58:44 by asinsard         ###   ########lyon.fr   */
+/*   Updated: 2025/01/31 01:57:21 by asinsard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,13 @@
 # include "../src/libft/include/ft_printf.h"
 # include "../src/libft/include/get_next_line.h"
 
-typedef struct s_index
-{
-	int	stack;
-	int	i;
-}	t_index;
-
 typedef struct s_stack
 {
 	struct s_stack	*prev;
 	struct s_stack	*next;
 	int				content;
-	int				index;
+	int				step;
+	int				pos_in_b;
 }	t_stack;
 
 

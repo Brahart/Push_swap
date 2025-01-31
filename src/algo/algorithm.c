@@ -6,7 +6,7 @@
 /*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 18:26:53 by asinsard          #+#    #+#             */
-/*   Updated: 2025/01/29 22:50:57 by asinsard         ###   ########lyon.fr   */
+/*   Updated: 2025/01/31 02:47:47 by asinsard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,104 +31,333 @@ void	sort_three(t_stack **stack)
 		reverse_rotate_a(stack);
 }
 
-void	find_min_and_push(t_stack **stack_a, t_stack **stack_b)
-{
-	int		i;
-	int		index;
-	int		len;
+// void	find_min_and_push(t_stack **stack_a, t_stack **stack_b)
+// {
+// 	int		i;
+// 	int		index;
+// 	int		len;
 
-	index = find_nbr_rotate((*stack_a), stack_min((*stack_a)));
-	len = stack_size((*stack_a));
-	if (index > len / 2)
+// 	index = find_nbr_rotate((*stack_a), stack_min((*stack_a)));
+// 	len = stack_size((*stack_a));
+// 	if (index > len / 2)
+// 	{
+// 		i = index;
+// 		while (i != len)
+// 		{
+// 			reverse_rotate_a(stack_a);
+// 			i++;
+// 		}
+// 	}
+// 	else if (index <= len / 2)
+// 	{
+// 		i = index;
+// 		while (i != 0)
+// 		{
+// 			rotate_a(stack_a);
+// 			i--;
+// 		}
+// 	}
+// 	push_to_b(stack_a, stack_b);
+// }
+
+void	make_reverse_rotate_together(t_stack **a, t_stack **b, int rev_rot)
+{
+	if (rev_rot > 0)
 	{
-		i = index;
-		while (i != len)
+		while (rev_rot != 0)
 		{
-			reverse_rotate_a(stack_a);
-			i++;
+			reverse_rotate_a(a);
+			rev_rot--;
 		}
 	}
-	else if (index <= len / 2)
+	else if (rev_rot < 0)
 	{
-		i = index;
-		while (i != 0)
+		while (rev_rot != 0)
 		{
-			rotate_a(stack_a);
-			i--;
+			reverse_rotate_b(b);
+			rev_rot++;
 		}
 	}
-	push_to_b(stack_a, stack_b);
 }
 
-int find_position(t_list *stack, int value)
+void	make_rotate_together(t_stack **a, t_stack **b, int rot)
 {
-	t_list *current;
+	if (rot > 0)
+	{
+		while (rot != 0)
+		{
+			rotate_a(a);
+			rot--;
+		}
+	}
+	else if (rot < 0)
+	{
+		while (rot != 0)
+		{
+			rotate_b(b);
+			rot++;
+		}
+	}
+}
+
+void	make_reverse_rotate(t_stack **stack, int rev_rot, int i)
+{
+	while (rev_rot != 0)
+	{
+		if (i == 1)
+		{
+			reverse_rotate_a(stack);
+			rev_rot--;
+		}
+		else if (i == 2)
+		{
+			reverse_rotate_b(stack);
+			rev_rot--;
+		}
+	}
+}
+
+void	make_rotate(t_stack **stack, int rot, int i)
+{
+	while (rot != 0)
+	{
+		if (i == 1)
+		{
+			rotate_a(stack);
+			rot--;
+		}
+		else if (i == 2)
+		{
+			rotate_b(stack);
+			rot--;
+		}
+	}
+}
+
+void	make_move_together(t_stack **a, t_stack **b, int cost_a, int cost_b, int move)
+{
+	if (move == 1)
+	{
+		while (cost_a || cost_b)
+		{
+			reverse_rotate_rr(a, b);
+			cost_a--;
+			cost_b--;
+		}
+		cost_a -= cost_b;
+		make_reverse_rotate_together(a, b, cost_a);
+	}
+	else if (move == 2)
+	{
+		while (cost_a || cost_b)
+		{
+			rotate_rr(a, b);
+			cost_a--;
+			cost_b--;
+		}
+		cost_a -= cost_b;
+		make_rotate_together(a, b, cost_a);
+	}
+}
+
+int	r_or_rr(int cost_a, int cost_b, t_stack *a, t_stack *b)
+{
+	int	len_a;
+	int	len_b;
+	int	sort_of;
+
+	len_a = stack_size(a);
+	len_b = stack_size(b);
+	sort_of = 0;
+	if (cost_a > len_a / 2)
+		sort_of += 1;
+	else
+		sort_of += 2;
+	if (cost_b > len_b / 2)
+		sort_of += 1;
+	else
+		sort_of += 2;
+	return (sort_of);
+}
+
+void	make_move_simple(t_stack **a, t_stack **b, int cost_a, int cost_b)
+{
+	int	rot;
+	int	rev_rot;
+
+	rot = 0;
+	rev_rot = 0;
+	if (cost_a > stack_size(*a) / 2)
+		make_reverse_rotate(a, cost_a, 1);
+	else if (cost_a < stack_size(*a) / 2)
+		make_rotate(a, cost_a, 1);
+	if (cost_b > stack_size(*b) / 2)
+		make_reverse_rotate(b, cost_b, 2);
+	else if (cost_b < stack_size(*b) / 2)
+		make_rotate(b, cost_b, 2);
+}
+
+
+int	value_is_max(t_stack *b, int value)
+{
 	int	i;
-	int len;
-	int pos;
-
-	current = stack;
+	int	max;
+	
 	i = 0;
-	len = stack_size(stack);
-	pos = 0;
-	if (value > get_max(stack) || value < get_min(stack))
-		pos = find_nbr_rotate(stack, stack_min(stack));
-	else 
+	max = stack_max(b);
+	while (b->content != max)
 	{
-		while (i < len) 
-		{
-			if (current->content < value && current->next->content > value)
-			{
-				pos = i + 1;
-				break ;
-			}
-			current = current->next;
-			i++;
-		}
+		i++;
+		b = b->next;
 	}
-	return (pos);
+	return (i);
 }
 
-int calculate_double_rotation_cost(t_list *a, t_list *b, int value) 
+int	value_is_min(t_stack *b, int value)
+{
+	int	i;
+	int	min;
+	
+	i = 0;
+	min = stack_min(b);
+	while (b->content != min)
+	{
+		i++;
+		b = b->next;
+	}
+	return (i);
+}
+
+int	value_is_random(t_stack *b, int value)
+{
+	int	i;
+
+	i = 0;
+	while (b->next != b)
+	{
+		if (b->content > value && b->next->content < value)
+			return (i);
+		i++;
+		b = b->next;
+	}
+	return (0);
+}
+
+int	find_place_in_b(t_stack *b, int value) // fonction pour avoir la position de a->content dans b
+{
+	int	i;
+
+	i = 0;
+	if (value > stack_max(b))
+		i = 1;
+	else if (value < stack_min(b))
+		i = 2;
+	else
+		i = 3;
+	return (i);
+}
+
+int	pos_value_in_b(int value, t_stack *b) // suite de la fonction find_place_in_b
+{
+	int	i;
+
+	i = find_place_in_b(b, value);
+	if (i == 1)
+		i = value_is_max(b, value);
+	else if (i == 2)
+		i = value_is_min(b, value);
+	else if (i == 3)
+		i = value_is_random(b, value);
+	return (i);
+}
+
+int	find_best_step(t_stack *a) // fonction pour trouver le chiffre le moins cher de a
+{
+	int	best;
+
+	best = 0;
+	while (a->next != a)
+	{
+		if (a->step > a->next->step)
+			best = a->next->step;
+		a = a->next;
+	}
+	return (best);
+}
+
+void	alloc_step(t_stack **a, t_stack **b)
+{
+	t_stack	*tmp;
+	int		cost_a;
+	int		cost_b;
+
+	tmp = (*a);
+	while (tmp->next != *a)
+	{
+		cost_a = find_nbr_rotate((*a), (*a)->content); // nombre de rotate ou rr qu'il faut pour ramener a a la pos 0;
+		cost_b = pos_value_in_b((*a)->content, (*b)); // nombre de rotate ou rr pour set la bonne position de a->content dans b;
+		tmp->step = cost_a + cost_b;
+		tmp = tmp->next;
+	}
+}
+
+void	find_move_together(t_stack **a, t_stack **b, int best)
 {
 	int	cost_a;
 	int	cost_b;
+	int	rot;
+	int	sort_of;
+	int	move;
 
-	cost_a = find_rotation_cost_in_a(a, value);
-	cost_b = find_rotation_cost_in_b(b, value);
-	if ((cost_a <= stack_size(a) / 2 && cost_b <= stack_size(b) / 2)
-		|| (cost_a > stack_size(a) / 2 && cost_b > stack_size(b) / 2))
+	cost_a = find_nbr_rotate((*a), best); //nombre d'instruction pour a
+	cost_b = pos_value_in_b(best, *b); // nombre d'instruction pour b
+	rot = 0;
+	sort_of = r_or_rr(cost_a, cost_b, *a, *b);
+	if ((sort_of / 4 == 0) || (sort_of / 2) == 0)
 	{
-		if (cost_a > cost_b)
-			return (cost_a);
+		if (sort_of / 4 == 0)
+		{
+			move = 1;
+			make_move_together(a, b, cost_a, cost_b, move);	
+		}
 		else
-			return (cost_b);
+		{
+			move = 2;
+			make_move_together(a, b, cost_a, cost_b, move);
+		}
 	}
-	return (cost_a + cost_b);
+	else
+		make_move_simple(a, b, cost_a, cost_b);
 }
 
-t_stack	*sort_b(t_stack **stack_a)
+t_stack	*sort_b(t_stack **a)
 {
-	t_stack	*stack_b;
+	t_stack	*b;
 	int		len;
+	int		best;
 
-	stack_b = NULL;
-	len = stack_size((*stack_a));
-	// if ((len > 3) && (!check_is_sorted((*stack_a))))
-	// 	push_to_b(stack_a, &stack_b);
-	// if ((len > 3) && (!check_is_sorted((*stack_a))))
-	// 	push_to_b(stack_a, &stack_b);
-	while ((len > 3) && (!check_is_sorted((*stack_a))))
-		find_min_and_push(stack_a, &stack_b);
-	if (!check_is_sorted((*stack_a)))
-		sort_three(stack_a);
-	len = stack_size(stack_b);
+	b = NULL;
+	len = stack_size((*a));
+	if ((len > 3) && (!check_is_sorted((*a))))
+		push_to_b(a, &b);
+	if ((len > 3) && (!check_is_sorted((*a))))
+		push_to_b(a, &b);
+	while ((len > 3) && (!check_is_sorted((*a))))
+	{
+		// find_min_and_push(a, &b);
+		alloc_step(a, &b);
+		best = find_best_step(*a);
+		find_move_together(a, &b, best);
+	}
+	if (!check_is_sorted((*a)))
+		sort_three(a);
+	len = stack_size(b);
 	while (len > 0)
 	{
-		push_to_a(stack_a, &stack_b);
+		push_to_a(a, &b);
 		len--;
 	}
-	return (stack_b);
+	return (b);
 }
 
 void	algo_sort(t_stack **stack_a)
