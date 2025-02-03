@@ -6,7 +6,7 @@
 /*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 18:26:53 by asinsard          #+#    #+#             */
-/*   Updated: 2025/01/31 02:47:47 by asinsard         ###   ########lyon.fr   */
+/*   Updated: 2025/02/03 20:00:26 by asinsard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,19 @@ void	sort_three(t_stack **stack)
 {
 	if (stack_max((*stack)) == (*stack)->content)
 	{
-		rotate_a(stack);
+		rotate_a(stack, true);
 		if (stack_min((*stack)) == (*stack)->next->content)
 			swap_a(stack);
 	}
 	else if (stack_min(*stack) == (*stack)->content)
 	{
 		swap_a(stack);
-		rotate_a(stack);
+		rotate_a(stack, true);
 	}
 	else if (stack_min(*stack) == (*stack)->next->content)
 		swap_a(stack);
 	else
-		reverse_rotate_a(stack);
+		reverse_rotate_a(stack, true);
 }
 
 // void	find_min_and_push(t_stack **stack_a, t_stack **stack_b)
@@ -66,7 +66,7 @@ void	make_reverse_rotate_together(t_stack **a, t_stack **b, int rev_rot)
 	{
 		while (rev_rot != 0)
 		{
-			reverse_rotate_a(a);
+			reverse_rotate_a(a, true);
 			rev_rot--;
 		}
 	}
@@ -74,10 +74,11 @@ void	make_reverse_rotate_together(t_stack **a, t_stack **b, int rev_rot)
 	{
 		while (rev_rot != 0)
 		{
-			reverse_rotate_b(b);
+			reverse_rotate_b(b, true);
 			rev_rot++;
 		}
 	}
+	push_to_b(a, b);
 }
 
 void	make_rotate_together(t_stack **a, t_stack **b, int rot)
@@ -86,7 +87,7 @@ void	make_rotate_together(t_stack **a, t_stack **b, int rot)
 	{
 		while (rot != 0)
 		{
-			rotate_a(a);
+			rotate_a(a, true);
 			rot--;
 		}
 	}
@@ -94,10 +95,11 @@ void	make_rotate_together(t_stack **a, t_stack **b, int rot)
 	{
 		while (rot != 0)
 		{
-			rotate_b(b);
+			rotate_b(b, true);
 			rot++;
 		}
 	}
+	push_to_b(a, b);
 }
 
 void	make_reverse_rotate(t_stack **stack, int rev_rot, int i)
@@ -106,12 +108,12 @@ void	make_reverse_rotate(t_stack **stack, int rev_rot, int i)
 	{
 		if (i == 1)
 		{
-			reverse_rotate_a(stack);
+			reverse_rotate_a(stack, true);
 			rev_rot--;
 		}
 		else if (i == 2)
 		{
-			reverse_rotate_b(stack);
+			reverse_rotate_b(stack, true);
 			rev_rot--;
 		}
 	}
@@ -123,12 +125,12 @@ void	make_rotate(t_stack **stack, int rot, int i)
 	{
 		if (i == 1)
 		{
-			rotate_a(stack);
+			rotate_a(stack, true);
 			rot--;
 		}
 		else if (i == 2)
 		{
-			rotate_b(stack);
+			rotate_b(stack, true);
 			rot--;
 		}
 	}
@@ -138,8 +140,9 @@ void	make_move_together(t_stack **a, t_stack **b, int cost_a, int cost_b, int mo
 {
 	if (move == 1)
 	{
-		while (cost_a || cost_b)
+		while ((cost_a >= 0) || (cost_b >= 0))
 		{
+			ft_printf("cost_a == %d || cost_b == %d\n");
 			reverse_rotate_rr(a, b);
 			cost_a--;
 			cost_b--;
@@ -149,7 +152,7 @@ void	make_move_together(t_stack **a, t_stack **b, int cost_a, int cost_b, int mo
 	}
 	else if (move == 2)
 	{
-		while (cost_a || cost_b)
+		while ((cost_a != 0) || (cost_b != 0))
 		{
 			rotate_rr(a, b);
 			cost_a--;
@@ -235,9 +238,9 @@ int	value_is_random(t_stack *b, int value)
 	i = 0;
 	while (b->next != b)
 	{
+		i++;
 		if (b->content > value && b->next->content < value)
 			return (i);
-		i++;
 		b = b->next;
 	}
 	return (0);
@@ -257,7 +260,7 @@ int	find_place_in_b(t_stack *b, int value) // fonction pour avoir la position de
 	return (i);
 }
 
-int	pos_value_in_b(int value, t_stack *b) // suite de la fonction find_place_in_b
+int	pos_value_in_b(t_stack *b, int value) // suite de la fonction find_place_in_b
 {
 	int	i;
 
@@ -271,16 +274,18 @@ int	pos_value_in_b(int value, t_stack *b) // suite de la fonction find_place_in_
 	return (i);
 }
 
-int	find_best_step(t_stack *a) // fonction pour trouver le chiffre le moins cher de a
+int	find_best_step(t_stack **a) // fonction pour trouver le chiffre le moins cher de a
 {
 	int	best;
+	t_stack	*tmp;
 
 	best = 0;
-	while (a->next != a)
+	tmp = (*a);
+	while ((tmp->next != (*a)))
 	{
-		if (a->step > a->next->step)
-			best = a->next->step;
-		a = a->next;
+		if (tmp->step > tmp->next->step)
+			best = tmp->next->content;
+		tmp = tmp->next;
 	}
 	return (best);
 }
@@ -294,8 +299,8 @@ void	alloc_step(t_stack **a, t_stack **b)
 	tmp = (*a);
 	while (tmp->next != *a)
 	{
-		cost_a = find_nbr_rotate((*a), (*a)->content); // nombre de rotate ou rr qu'il faut pour ramener a a la pos 0;
-		cost_b = pos_value_in_b((*a)->content, (*b)); // nombre de rotate ou rr pour set la bonne position de a->content dans b;
+		cost_a = find_nbr_rotate(*a, tmp->content); // nombre de rotate ou rr qu'il faut pour ramener a a la pos 0;
+		cost_b = pos_value_in_b(*b, tmp->content); // nombre de rotate ou rr pour set la bonne position de a->content dans b;
 		tmp->step = cost_a + cost_b;
 		tmp = tmp->next;
 	}
@@ -309,8 +314,8 @@ void	find_move_together(t_stack **a, t_stack **b, int best)
 	int	sort_of;
 	int	move;
 
-	cost_a = find_nbr_rotate((*a), best); //nombre d'instruction pour a
-	cost_b = pos_value_in_b(best, *b); // nombre d'instruction pour b
+	cost_a = find_nbr_rotate(*a, best); //nombre d'instruction pour a
+	cost_b = pos_value_in_b(*b, best); // nombre d'instruction pour b
 	rot = 0;
 	sort_of = r_or_rr(cost_a, cost_b, *a, *b);
 	if ((sort_of / 4 == 0) || (sort_of / 2) == 0)
@@ -346,8 +351,10 @@ t_stack	*sort_b(t_stack **a)
 	{
 		// find_min_and_push(a, &b);
 		alloc_step(a, &b);
-		best = find_best_step(*a);
+		best = find_best_step(a);
 		find_move_together(a, &b, best);
+		display_list(b, "stack_a");
+		len--;
 	}
 	if (!check_is_sorted((*a)))
 		sort_three(a);

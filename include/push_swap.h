@@ -6,7 +6,7 @@
 /*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:55:16 by asinsard          #+#    #+#             */
-/*   Updated: 2025/01/31 01:57:21 by asinsard         ###   ########lyon.fr   */
+/*   Updated: 2025/02/03 19:55:53 by asinsard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>
+# include <stdbool.h>
 # include "../src/libft/include/libft.h"
 # include "../src/libft/include/ft_printf.h"
 # include "../src/libft/include/get_next_line.h"
@@ -41,13 +42,13 @@ void	push_to_a(t_stack **stack_a, t_stack **stack_b);
 void	push_to_b(t_stack **stack_a, t_stack **stack_b);
 
 /* ---------ROTATE--------- */
-void	rotate_a(t_stack **stack_a);
-void	rotate_b(t_stack **stack_b);
+void	rotate_a(t_stack **stack_a, bool flag);
+void	rotate_b(t_stack **stack_b, bool flag);
 void	rotate_rr(t_stack **stack_a, t_stack **stack_b);
 
 /* ---------REVERSE-------- */
-void	reverse_rotate_a(t_stack **stack_a);
-void	reverse_rotate_b(t_stack **stack_b);
+void	reverse_rotate_a(t_stack **stack_a, bool flag);
+void	reverse_rotate_b(t_stack **stack_b, bool flag);
 void	reverse_rotate_rr(t_stack **stack_a, t_stack **stack_b);
 
 /* ---------------SOURCE-------------- */

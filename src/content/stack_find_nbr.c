@@ -6,7 +6,7 @@
 /*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 18:50:10 by asinsard          #+#    #+#             */
-/*   Updated: 2025/01/31 02:15:10 by asinsard         ###   ########lyon.fr   */
+/*   Updated: 2025/02/03 18:16:41 by asinsard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,16 @@
 int	find_nbr_rotate(t_stack *stack, int value)
 {
 	int	i;
+	t_stack	*tmp;
 
 	i = 0;
-	if (!stack)
+	tmp = stack;
+	if (!tmp)
 		return (-1);
-	while (stack->content != value)
+	while (tmp->content != value)
 	{
 		i++;
-		stack = stack->next;
+		tmp = tmp->next;
 	}
 	return (i);
 }
