@@ -6,7 +6,7 @@
 /*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 15:10:30 by asinsard          #+#    #+#             */
-/*   Updated: 2025/02/03 16:49:52 by asinsard         ###   ########lyon.fr   */
+/*   Updated: 2025/02/04 20:01:23 by asinsard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,21 @@ void	display_list(t_stack *head, const char *str)
 
 	i = 1;
 	tmp = head;
+	if (!tmp)
+	{
+		ft_printf("ERROR\nliste : %s doesn't exist\n");
+		return ;		
+	}
 	ft_printf("liste : %s\n", str);
 	while (tmp->next != head)
 	{
-		ft_printf(" NODE %d\n  [%d]\n   |\n   v\n", i, tmp->content);
+		ft_printf(" NODE %d\n  [%d]->step == %d\n   |\n   v\n", i, tmp->content, tmp->step);
 		tmp = tmp->next;
 		i++;
 	}
-	ft_printf(" NODE %d\n  [%d]\n   |\n   v\n", i, tmp->content);
+	ft_printf(" NODE %d\n  [%d]->step == %d\n   |\n   v\n", i, tmp->content, tmp->step);
 	tmp = tmp->next;
-	ft_printf(" NODE 1\n  [%d]\n   |\n   v\n", tmp->content);
+	ft_printf(" NODE 1\n  [%d]->step == %d\n   |\n   v\n", tmp->content, tmp->step);
 	ft_printf(" [...]\n");
 }
 

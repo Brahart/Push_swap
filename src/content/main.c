@@ -6,7 +6,7 @@
 /*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 14:07:25 by asinsard          #+#    #+#             */
-/*   Updated: 2025/01/29 19:42:06 by asinsard         ###   ########lyon.fr   */
+/*   Updated: 2025/02/04 18:20:45 by asinsard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	main(int ac, char **av)
 	algo_sort(&stack_a);
 	if (check_is_sorted(stack_a))
 		ft_printf("\e[1;32mSUCCESS !!!\n\e[0m");
+	display_list(stack_a, "stack_a");
 	if (ac == 2)
 		free_split(arg);
 	free_list(stack_a);

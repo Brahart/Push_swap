@@ -6,7 +6,7 @@
 /*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 18:26:53 by asinsard          #+#    #+#             */
-/*   Updated: 2025/02/03 20:00:26 by asinsard         ###   ########lyon.fr   */
+/*   Updated: 2025/02/05 00:59:52 by asinsard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,6 @@ void	make_move_together(t_stack **a, t_stack **b, int cost_a, int cost_b, int mo
 	{
 		while ((cost_a >= 0) || (cost_b >= 0))
 		{
-			ft_printf("cost_a == %d || cost_b == %d\n");
 			reverse_rotate_rr(a, b);
 			cost_a--;
 			cost_b--;
@@ -246,7 +245,7 @@ int	value_is_random(t_stack *b, int value)
 	return (0);
 }
 
-int	find_place_in_b(t_stack *b, int value) // fonction pour avoir la position de a->content dans b
+int	find_place_in_b(t_stack *b, int value) // fonction pour avoir la position de a->content dans stack
 {
 	int	i;
 
@@ -297,13 +296,17 @@ void	alloc_step(t_stack **a, t_stack **b)
 	int		cost_b;
 
 	tmp = (*a);
+	cost_a = 0;
+	cost_b = 0;
 	while (tmp->next != *a)
 	{
 		cost_a = find_nbr_rotate(*a, tmp->content); // nombre de rotate ou rr qu'il faut pour ramener a a la pos 0;
 		cost_b = pos_value_in_b(*b, tmp->content); // nombre de rotate ou rr pour set la bonne position de a->content dans b;
 		tmp->step = cost_a + cost_b;
+		ft_printf("NODE [%d]->cost_a = %d || cost_b == %d\n",  tmp->content, cost_a, cost_b);
 		tmp = tmp->next;
 	}
+	ft_printf("tmp->content == %d\n", tmp->content);
 }
 
 void	find_move_together(t_stack **a, t_stack **b, int best)
@@ -335,51 +338,130 @@ void	find_move_together(t_stack **a, t_stack **b, int best)
 		make_move_simple(a, b, cost_a, cost_b);
 }
 
-t_stack	*sort_b(t_stack **a)
+void	find_max_and_move(t_stack **a, t_stack **b)
+{
+	t_stack	*tmp;
+	int		max;
+	int		move;
+
+	max = stack_max(*a);
+	move = 0;
+	tmp = *a;
+	while (tmp->content != max)
+	{
+		move++;
+		tmp = tmp->next;
+		write(1, "1", 1);
+	}
+	if (move == 1)
+		rotate_a(a, true);
+	else if (move == 2)
+		reverse_rotate_a(a, true);
+	ft_printf("move == %d\n", move);
+}
+
+void	find_min_and_move(t_stack **a, t_stack **b)
+{
+	t_stack	*tmp;
+	int		min;
+	int		move;
+
+	min = stack_min(*a);
+	move = 0;
+	tmp = *a;
+	while (tmp->content != min)
+	{
+		move++;
+		tmp = tmp->next;
+	}
+	if (move == 1)
+		rotate_a(a, true);
+	else if (move == 2)
+		reverse_rotate_a(a, true);
+}
+
+void	find_random_and_move(t_stack **a, t_stack **b)
+{
+	t_stack	*tmp;
+	int		random;
+	int		move;
+
+	random = (*b)->content;
+	move = 0;
+	tmp = *a;
+	while (tmp->next != *a)
+	{
+		if (random > tmp->content && random < tmp->next->content)
+			break ;
+		move++;
+		tmp = tmp->next;
+	}
+	if (random == 1)
+		rotate_a(a, true);
+	else if (random == 2)
+		reverse_rotate_a(a, true);
+	ft_printf("move == %d\n", move);
+}
+
+void	sort_a(t_stack **a, t_stack **b)
+{
+	int	value;
+	int	rot;
+	int	rrot;
+
+	if ((*b)->content > stack_max(*a))
+		find_max_and_move(a, b);
+	else if ((*b)->content < stack_min(*a))
+		find_min_and_move(a, b);
+	else
+		find_random_and_move(a, b);
+}
+
+void	sort_b(t_stack **a)
 {
 	t_stack	*b;
 	int		len;
 	int		best;
 
 	b = NULL;
-	len = stack_size((*a));
-	if ((len > 3) && (!check_is_sorted((*a))))
+	if ((stack_size(*a) > 3) && (!check_is_sorted((*a))))
 		push_to_b(a, &b);
-	if ((len > 3) && (!check_is_sorted((*a))))
+	if ((stack_size(*a) > 3) && (!check_is_sorted((*a))))
 		push_to_b(a, &b);
-	while ((len > 3) && (!check_is_sorted((*a))))
+	while ((stack_size(*a) > 3) && (!check_is_sorted((*a))))
 	{
 		// find_min_and_push(a, &b);
 		alloc_step(a, &b);
+		display_list(*a, "stack_a");
 		best = find_best_step(a);
 		find_move_together(a, &b, best);
-		display_list(b, "stack_a");
-		len--;
 	}
 	if (!check_is_sorted((*a)))
 		sort_three(a);
 	len = stack_size(b);
+	if (b != NULL)
+		sort_a(a, &b);
 	while (len > 0)
 	{
 		push_to_a(a, &b);
 		len--;
 	}
-	return (b);
+	// while (!check_is_sorted(*a))
+	// 	rotate_a(a, true);
 }
+
 
 void	algo_sort(t_stack **stack_a)
 {
 	int		len;
 	int		i;
-	t_stack	*stack_b;
 
 	len = stack_size(*stack_a);
-	stack_b = NULL;
 	if (len == 2 && !check_is_sorted((*stack_a)))
 		swap_a(stack_a);
 	else
 	{
-		stack_b = sort_b(stack_a);
+		sort_b(stack_a);
 		
 	}
 }
