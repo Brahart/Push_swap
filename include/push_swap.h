@@ -6,7 +6,7 @@
 /*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:55:16 by asinsard          #+#    #+#             */
-/*   Updated: 2025/02/06 19:09:39 by asinsard         ###   ########lyon.fr   */
+/*   Updated: 2025/02/07 21:54:32 by asinsard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,6 @@ int		find_place_in_b(t_stack *b, int push_value);
 void	ft_error(const char *str);
 char	**check_arg(char *str);
 void	free_split(char **split);
-int		find_nbr_rotate(t_stack *stack, int value);
+int		find_nbr_rotate(t_stack *stack, int value, bool flag);
 
 #endif

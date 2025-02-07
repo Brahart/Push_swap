@@ -6,7 +6,7 @@
 /*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 18:26:53 by asinsard          #+#    #+#             */
-/*   Updated: 2025/02/07 01:49:41 by asinsard         ###   ########lyon.fr   */
+/*   Updated: 2025/02/07 22:11:57 by asinsard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,35 +30,6 @@ void	sort_three(t_stack **stack)
 	else
 		reverse_rotate_a(stack, true);
 }
-
-// void	find_min_and_push(t_stack **stack_a, t_stack **stack_b)
-// {
-// 	int		i;
-// 	int		index;
-// 	int		len;
-
-// 	index = find_nbr_rotate((*stack_a), stack_min((*stack_a)));
-// 	len = stack_size((*stack_a));
-// 	if (index > len / 2)
-// 	{
-// 		i = index;
-// 		while (i != len)
-// 		{
-// 			reverse_rotate_a(stack_a);
-// 			i++;
-// 		}
-// 	}
-// 	else if (index <= len / 2)
-// 	{
-// 		i = index;
-// 		while (i != 0)
-// 		{
-// 			rotate_a(stack_a);
-// 			i--;
-// 		}
-// 	}
-// 	push_to_b(stack_a, stack_b);
-// }
 
 void	make_reverse_rotate_together(t_stack **a, t_stack **b, int rev_rot)
 {
@@ -138,7 +109,7 @@ void	make_move_together(t_stack **a, t_stack **b, int cost_a, int cost_b, int mo
 {
 	if (move == 1)
 	{
-		while ((cost_a >= 0) || (cost_b >= 0))
+		while ((cost_a >= 0) && (cost_b >= 0))
 		{
 			reverse_rotate_rr(a, b);
 			cost_a--;
@@ -149,7 +120,7 @@ void	make_move_together(t_stack **a, t_stack **b, int cost_a, int cost_b, int mo
 	}
 	else if (move == 2)
 	{
-		while ((cost_a != 0) || (cost_b != 0))
+		while ((cost_a != 0) && (cost_b != 0))
 		{
 			rotate_rr(a, b);
 			cost_a--;
@@ -198,6 +169,25 @@ void	make_move_simple(t_stack **a, t_stack **b, int cost_a, int cost_b)
 }
 
 
+// int	value_is_max(t_stack *b, int value, bool flag)
+// {
+// 	int	i;
+// 	int	min;
+	
+// 	i = 0;
+// 	min = stack_min(b);
+// 	if ((b->content == min))
+// 		return (0);
+// 	while (b->content != min)
+// 	{
+// 		b = b->next;
+// 		i++;
+// 	}
+// 	if (stack_size(b) > 2 && i > (stack_size(b) / 2) && flag == true)
+// 		i = stack_size(b) - i;
+// 	return (i);
+// }
+
 int	value_is_max(t_stack *b, int value, bool flag)
 {
 	int	i;
@@ -213,9 +203,31 @@ int	value_is_max(t_stack *b, int value, bool flag)
 		i++;
 	}
 	if (stack_size(b) > 2 && i > (stack_size(b) / 2) && flag == true)
-		i = stack_size(b) - i;	
+	{
+		i = stack_size(b) - i;
+		i *= -1;
+	}	
 	return (i);
 }
+
+// int	value_is_min(t_stack *b, int value, bool flag)
+// {
+// 	int	i;
+// 	int	max;
+	
+// 	i = 0;
+// 	max = stack_max(b);
+// 	if ((b->content == max))
+// 		return (0);
+// 	while (b->content != max)
+// 	{
+// 		i++;
+// 		b = b->next;
+// 	}
+// 	if (stack_size(b) > 2 && i > (stack_size(b) / 2) && flag == true)
+// 		i = stack_size(b) - i;
+// 	return (i);
+// }
 
 int	value_is_min(t_stack *b, int value, bool flag)
 {
@@ -232,25 +244,57 @@ int	value_is_min(t_stack *b, int value, bool flag)
 		b = b->next;
 	}
 	if (stack_size(b) > 2 && i > (stack_size(b) / 2) && flag == true)
+	{
 		i = stack_size(b) - i;
+		i *= -1;
+	}
 	return (i);
 }
+
+// int	value_is_random(t_stack *b, int value, bool flag)
+// {
+// 	int		i;
+
+// 	i = 0;
+// 	if (b->prev->content > value && b->content < value)
+// 		return (0);
+// 	while (1)
+// 	{
+// 		if (b->content < value && b->next->content > value)
+// 		{
+// 			i++;
+// 			break ;
+// 		}
+// 		i++;
+// 		b = b->next;
+// 	}
+// 	if (stack_size(b) > 2 && i > (stack_size(b) / 2) && flag == true)
+// 		i = stack_size(b) - i;
+// 	return (i);
+// }
 
 int	value_is_random(t_stack *b, int value, bool flag)
 {
 	int		i;
 
 	i = 0;
+	if (b->prev->content > value && b->content < value)
+		return (0);
 	while (1)
 	{
-		if (b->content > value && b->next->content < value)
+		if (b->content < value && b->next->content > value)
+		{
+			i++;
 			break ;
+		}
 		i++;
 		b = b->next;
 	}
 	if (stack_size(b) > 2 && i > (stack_size(b) / 2) && flag == true)
+	{
 		i = stack_size(b) - i;
-	ft_printf("i == %d\n", i);
+		i *= -1;	
+	}
 	return (i);
 }
 
@@ -279,6 +323,8 @@ int	pos_value_in_b(t_stack *b, int value, bool flag) // suite de la fonction fin
 		i = value_is_min(b, value, flag);
 	else if (i == 3)
 		i = value_is_random(b, value, flag);
+	if (i == stack_size(b))
+		i = 0;
 	return (i);
 }
 
@@ -310,6 +356,32 @@ int	find_best_step(t_stack **a)
 	return (best);
 }
 
+void	comp_move(t_stack **tmp, int cost_a, int cost_b)
+{
+	if (cost_a < 0 && cost_b < 0)
+	{
+		if (cost_a > cost_b)
+			(*tmp)->step = (cost_b - cost_a) * (-1);
+		else
+			(*tmp)->step = (cost_a - cost_b) * (-1);
+	}
+	else if (cost_a > 0 && cost_b > 0)
+	{
+		if (cost_a > cost_b)
+			(*tmp)->step = cost_b - cost_a;
+		else
+			(*tmp)->step = cost_a - cost_b;
+	}
+	else
+	{
+		if (cost_a < 0)
+			cost_a *= -1;
+		else if (cost_b < 0)
+			cost_b *= -1;
+		(*tmp)->step = cost_b + cost_a;
+	}
+}
+
 void	alloc_step(t_stack **a, t_stack **b)
 {
 	t_stack	*tmp;
@@ -321,15 +393,18 @@ void	alloc_step(t_stack **a, t_stack **b)
 	cost_b = 0;
 	while (tmp->next != *a)
 	{
-		cost_a = find_nbr_rotate(*a, tmp->content); // nombre de rotate ou rr qu'il faut pour ramener a a la pos 0;
+		cost_a = find_nbr_rotate(*a, tmp->content, true); // nombre de rotate ou rr qu'il faut pour ramener a a la pos 0;
 		cost_b = pos_value_in_b(*b, tmp->content, true); // nombre de rotate ou rr pour set la bonne position de a->content dans b;
-		ft_printf("[%d] || cost_a == %d || cost_b == %d\n", tmp->content, cost_a, cost_b);
-		tmp->step = cost_a + cost_b;
+		comp_move(&tmp, cost_a, cost_b);
+		// tmp->step = cost_a + cost_b;
+		// ft_printf("[%d] || step == %d || cost_a == %d || cost_b == %d\n", tmp->content, tmp->step, cost_a, cost_b);
 		tmp = tmp->next;
 	}
-	cost_a = find_nbr_rotate(*a, tmp->content);
+	cost_a = find_nbr_rotate(*a, tmp->content, true);
 	cost_b = pos_value_in_b(*b, tmp->content, true);
-	tmp->step = cost_a + cost_b;
+	comp_move(&tmp, cost_a, cost_b);
+	// tmp->step = cost_a + cost_b;
+	// ft_printf("[%d] || step == %d || cost_a == %d || cost_b == %d\n\n\n", tmp->content, tmp->step, cost_a, cost_b);
 }
 
 void	find_move_together(t_stack **a, t_stack **b, int best)
@@ -340,8 +415,9 @@ void	find_move_together(t_stack **a, t_stack **b, int best)
 	int	sort_of;
 	int	move;
 
-	cost_a = find_nbr_rotate(*a, best); //nombre d'instruction pour a
+	cost_a = find_nbr_rotate(*a, best, false); //nombre d'instruction pour a
 	cost_b = pos_value_in_b(*b, best, false); // nombre d'instruction pour b
+	// ft_printf("cost_a == %d || cost_b == %d\n", cost_a, cost_b);
 	rot = 0;
 	sort_of = r_or_rr(cost_a, cost_b, *a, *b);
 	if (sort_of == 6)
@@ -357,26 +433,6 @@ void	find_move_together(t_stack **a, t_stack **b, int best)
 	else
 		make_move_simple(a, b, cost_a, cost_b);
 	push_to_b(a, b);
-}
-
-void	find_max_and_move(t_stack **a, t_stack **b)
-{
-	t_stack	*tmp;
-	int		max;
-	int		move;
-
-	max = stack_max(*a);
-	move = 0;
-	tmp = *a;
-	while (tmp->content != max)
-	{
-		move++;
-		tmp = tmp->next;
-	}
-	if (move > (stack_size(*a) / 2))
-		make_reverse_rotate(a, move, 1);
-	if (move <= (stack_size(*a) / 2))
-		make_rotate(a, move, 1);
 }
 
 void	find_min_and_move(t_stack **a, t_stack **b)
@@ -402,21 +458,33 @@ void	find_min_and_move(t_stack **a, t_stack **b)
 void	find_random_and_move(t_stack **a, t_stack **b)
 {
 	t_stack	*tmp;
-	int		random;
+	int		value;
 	int		move;
 
-	random = (*b)->content;
+	value = (*b)->content;
 	move = 0;
 	tmp = *a;
-	while (random > tmp->content && random < tmp->next->content)
+	if ((tmp->content < stack_min(*a) || (tmp->content > stack_max(*a))))
 	{
 		move++;
 		tmp = tmp->next;
 	}
-	if (move > (stack_size(*a) / 2))
-		make_reverse_rotate(a, move, 1);
+	while (1)
+	{
+		if (tmp->content < value && tmp->next->content > value)
+		{
+			move++;
+			break ;
+		}
+		move++;
+		tmp = tmp->next;
+	}
 	if (move <= (stack_size(*a) / 2))
 		make_rotate(a, move, 1);
+	if (move > (stack_size(*a) / 2))
+		make_reverse_rotate(a, move, 1);
+	if (value > tmp->prev->prev->content && value < tmp->prev->content)
+		reverse_rotate_a(a, true);
 }
 
 void	find_good_place(t_stack **a)
@@ -453,14 +521,12 @@ void	sort_a(t_stack **a, t_stack **b)
 	len_b = stack_size(*b);
 	while (len_b > 0)
 	{
-		if ((*b)->content > stack_max(*a))
-			find_max_and_move(a, b);
-		else if ((*b)->content < stack_min(*a))
+		if (((*b)->content > stack_max(*a)) || ((*b)->content < stack_min(*a)))
 			find_min_and_move(a, b);
 		else
 			find_random_and_move(a, b);
 		push_to_a(a, b);
-		len_b--;		
+		len_b--;
 	}
 	find_good_place(a);
 }
@@ -479,8 +545,6 @@ void	sort_b(t_stack **a)
 	len = stack_size(*a);
 	while ((len > 3) && (!check_is_sorted((*a))))
 	{
-		display_list(*a, "a");
-		display_list(b, "b");
 		alloc_step(a, &b);
 		best = find_best_step(a);
 		find_move_together(a, &b, best);

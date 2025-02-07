@@ -6,7 +6,7 @@
 /*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:55:26 by asinsard          #+#    #+#             */
-/*   Updated: 2025/01/29 19:07:26 by asinsard         ###   ########lyon.fr   */
+/*   Updated: 2025/02/07 20:03:24 by asinsard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void	swap_a(t_stack **stack_a)
 {
 	int	tmp;
 
-	if ((*stack_a)->content && (*stack_a)->next->content)
+	tmp = 0;
+	if ((*stack_a) && (*stack_a)->next)
 	{
 		tmp = (*stack_a)->content;
 		(*stack_a)->content = (*stack_a)->next->content;
@@ -29,7 +30,7 @@ void	swap_b(t_stack **stack_b)
 {
 	int	tmp;
 
-	if ((*stack_b)->content && (*stack_b)->next->content)
+	if ((*stack_b) && (*stack_b)->next)
 	{
 		tmp = (*stack_b)->content;
 		(*stack_b)->content = (*stack_b)->next->content;
