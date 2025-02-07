@@ -6,7 +6,7 @@
 /*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:55:16 by asinsard          #+#    #+#             */
-/*   Updated: 2025/02/03 19:55:53 by asinsard         ###   ########lyon.fr   */
+/*   Updated: 2025/02/06 19:09:39 by asinsard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ typedef struct s_stack
 	struct s_stack	*next;
 	int				content;
 	int				step;
+	int				rot_a;
+	int				rrot_a;
+	int				rot_b;
+	int				rrot_b;
 	int				pos_in_b;
 }	t_stack;
 
