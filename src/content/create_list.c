@@ -6,7 +6,7 @@
 /*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 15:10:30 by asinsard          #+#    #+#             */
-/*   Updated: 2025/02/11 21:41:14 by asinsard         ###   ########lyon.fr   */
+/*   Updated: 2025/02/12 01:54:11 by asinsard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,17 +61,17 @@ void	display_list(t_stack *head, const char *str)
 		ft_printf("ERROR\nliste : %s doesn't exist\n");
 		return ;		
 	}
-	ft_printf("liste : %s\n", str);
+	ft_printf("\e[1;31mliste : %s\n\e[0m", str);
 	while (tmp->next != head)
 	{
-		ft_printf(" NODE %d\n  [%d]->index == %d\n   |\n   v\n", i, tmp->content, tmp->index);
+		ft_printf("\e[1;34m NODE %d\n  [\e[1;32m%d\e[1;34m]->index == %d\n   |\n   v\n\e[0m", i, tmp->content, tmp->index);
 		tmp = tmp->next;
 		i++;
 	}
-	ft_printf(" NODE %d\n  [%d]->index == %d\n   |\n   v\n", i, tmp->content, tmp->index);
+	ft_printf("\e[1;34m NODE %d\n  [\e[1;32m%d\e[1;34m]->index == %d\n   |\n   v\n\e[0m", i, tmp->content, tmp->index);
 	tmp = tmp->next;
-	ft_printf(" NODE 1\n  [%d]->index == %d\n   |\n   v\n", tmp->content, tmp->index);
-	ft_printf(" [...]\n");
+	ft_printf("\e[1;34m NODE 1\n  [\e[1;32m%d\e[1;34m]->index == %d\n   |\n   v\n\e[0m", tmp->content, tmp->index);
+	ft_printf("\e[1;34m [...]\n\e[0m");
 }
 
 void	free_list(t_stack *head)
