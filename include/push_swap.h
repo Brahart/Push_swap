@@ -6,7 +6,7 @@
 /*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:55:16 by asinsard          #+#    #+#             */
-/*   Updated: 2025/02/07 21:54:32 by asinsard         ###   ########lyon.fr   */
+/*   Updated: 2025/02/11 22:00:10 by asinsard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,7 @@ typedef struct s_stack
 	struct s_stack	*next;
 	int				content;
 	int				step;
-	int				rot_a;
-	int				rrot_a;
-	int				rot_b;
-	int				rrot_b;
+	int				index;
 	int				pos_in_b;
 }	t_stack;
 
@@ -76,6 +73,8 @@ int		stack_min(t_stack *stack);
 int		stack_max(t_stack *stack);
 int		stack_size(t_stack *stack);
 int		stack_last(t_stack *stack);
+int		index_min(t_stack *stack);
+int		index_max(t_stack *stack);
 void	take_index(t_stack *stack);
 int		find_place_in_a(t_stack *a, int push_value);
 int		find_place_in_b(t_stack *b, int push_value);

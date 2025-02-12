@@ -6,7 +6,7 @@
 /*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:55:19 by asinsard          #+#    #+#             */
-/*   Updated: 2025/02/04 20:26:43 by asinsard         ###   ########lyon.fr   */
+/*   Updated: 2025/02/11 23:26:17 by asinsard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void	push_to_b(t_stack **stack_a, t_stack **stack_b)
 	if (!stack_a || !(*stack_a))
 		return ;
 	head = (*stack_a);
-	if ((*stack_a)->next == (*stack_a))
-		(*stack_a) = NULL;
+	// if ((*stack_a)->next == (*stack_a))
+	// 	(*stack_a) = NULL;
 	(*stack_a) = (*stack_a)->next;
 	(*stack_a)->prev = head->prev;
 	head->prev->next = (*stack_a);
