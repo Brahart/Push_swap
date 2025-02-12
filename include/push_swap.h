@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: abrahamsinsard <abrahamsinsard@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:55:16 by asinsard          #+#    #+#             */
-/*   Updated: 2025/02/11 22:00:10 by asinsard         ###   ########lyon.fr   */
+/*   Updated: 2025/02/12 15:37:57 by abrahamsins      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ typedef struct s_stack
 	struct s_stack	*next;
 	int				content;
 	int				step;
-	int				index;
 	int				pos_in_b;
 }	t_stack;
 
@@ -73,11 +72,6 @@ int		stack_min(t_stack *stack);
 int		stack_max(t_stack *stack);
 int		stack_size(t_stack *stack);
 int		stack_last(t_stack *stack);
-int		index_min(t_stack *stack);
-int		index_max(t_stack *stack);
-void	take_index(t_stack *stack);
-int		find_place_in_a(t_stack *a, int push_value);
-int		find_place_in_b(t_stack *b, int push_value);
 
 /* ---------UTILS--------- */
 void	ft_error(const char *str);
@@ -85,4 +79,18 @@ char	**check_arg(char *str);
 void	free_split(char **split);
 int		find_nbr_rotate(t_stack *stack, int value, bool flag);
 
+int		pos_value_in_b(t_stack *b, int value, bool flag);
+void	alloc_step(t_stack **a, t_stack **b);
+int		find_best_step(t_stack **a);
+void	comp_move(t_stack **tmp, int cost_a, int cost_b);
+void	comp_rev_rot(t_stack **tmp, int cost_a, int cost_b);
+void	comp_rot(t_stack **tmp, int cost_a, int cost_b);
+void	find_move_together(t_stack **a, t_stack **b, int best);
+void	make_rotate(t_stack **stack, int rot, int move);
+void	make_reverse_rotate(t_stack **stack, int rev_rot, int move);
+void	make_move_simple(t_stack **a, t_stack **b, int cost_a, int cost_b);
+void	find_min_and_move(t_stack **a, t_stack **b);
+void	find_random_and_move(t_stack **a, t_stack **b);
+void	find_good_place(t_stack **a);
+int		r_or_rr(int *cost_a, int *cost_b, t_stack *a, t_stack *b);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: abrahamsinsard <abrahamsinsard@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 14:57:57 by asinsard          #+#    #+#             */
-/*   Updated: 2025/01/23 17:51:54 by asinsard         ###   ########lyon.fr   */
+/*   Updated: 2025/02/12 15:17:36 by abrahamsins      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_error(const char *str)
 {
-	ft_printf("\e[1;31m%s\e[0m\n", str);
+	write(2, "\e[1;31m%s\e[0m\n", ft_strlen(str));
 }
 
 char	**check_arg(char *str)

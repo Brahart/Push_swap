@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: abrahamsinsard <abrahamsinsard@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 15:10:30 by asinsard          #+#    #+#             */
-/*   Updated: 2025/02/12 01:54:11 by asinsard         ###   ########lyon.fr   */
+/*   Updated: 2025/02/12 15:18:32 by abrahamsins      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ t_stack	*add_new_node(int value)
 	new_node->prev = NULL;
 	new_node->next = NULL;
 	new_node->step = 0;
-	new_node->index = -1;
 	return (new_node);
 }
 
@@ -64,13 +63,13 @@ void	display_list(t_stack *head, const char *str)
 	ft_printf("\e[1;31mliste : %s\n\e[0m", str);
 	while (tmp->next != head)
 	{
-		ft_printf("\e[1;34m NODE %d\n  [\e[1;32m%d\e[1;34m]->index == %d\n   |\n   v\n\e[0m", i, tmp->content, tmp->index);
+		ft_printf("\e[1;34m NODE %d\n  [\e[1;32m%d\e[1;34m]\n   |\n   v\n\e[0m", i, tmp->content);
 		tmp = tmp->next;
 		i++;
 	}
-	ft_printf("\e[1;34m NODE %d\n  [\e[1;32m%d\e[1;34m]->index == %d\n   |\n   v\n\e[0m", i, tmp->content, tmp->index);
+	ft_printf("\e[1;34m NODE %d\n  [\e[1;32m%d\e[1;34m]\n   |\n   v\n\e[0m", i, tmp->content);
 	tmp = tmp->next;
-	ft_printf("\e[1;34m NODE 1\n  [\e[1;32m%d\e[1;34m]->index == %d\n   |\n   v\n\e[0m", tmp->content, tmp->index);
+	ft_printf("\e[1;34m NODE 1\n  [\e[1;32m%d\e[1;34m]\n   |\n   v\n\e[0m", tmp->content);
 	ft_printf("\e[1;34m [...]\n\e[0m");
 }
 

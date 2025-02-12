@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: abrahamsinsard <abrahamsinsard@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 17:40:25 by asinsard          #+#    #+#             */
-/*   Updated: 2025/02/11 21:59:42 by asinsard         ###   ########lyon.fr   */
+/*   Updated: 2025/02/12 15:19:13 by abrahamsins      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,42 +44,6 @@ int	stack_max(t_stack *stack)
 	}
 	if (i < tmp->content)
 		i = tmp->content;
-	return (i);
-}
-
-int	index_max(t_stack *stack)
-{
-	int		i;
-	t_stack	*tmp;
-
-	tmp = stack;
-	i = tmp->index;
-	while (tmp->next != stack)
-	{
-		if (i < tmp->index)
-			i = tmp->index;
-		tmp = tmp->next;
-	}
-	if (i < tmp->index)
-		i = tmp->index;
-	return (i);
-}
-
-int	index_min(t_stack *stack)
-{
-	int		i;
-	t_stack	*tmp;
-
-	tmp = stack;
-	i = tmp->index;
-	while (tmp->next != stack)
-	{
-		if (i > tmp->index)
-			i = tmp->index;
-		tmp = tmp->next;
-	}
-	if (i > tmp->index)
-		i = tmp->index;
 	return (i);
 }
 
