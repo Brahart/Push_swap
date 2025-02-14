@@ -1,28 +1,40 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort_a.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/13 02:56:15 by asinsard          #+#    #+#             */
+/*   Updated: 2025/02/14 01:44:51 by asinsard         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/push_swap.h"
 
-void	find_good_place(t_stack **a)
+void	find_good_place(t_stack **stack)
 {
 	int		min;
 	int		i;
 	t_stack	*tmp;
 
-	min = stack_min(*a);
+	min = stack_min(*stack);
 	i = 0;
-	tmp = *a;
+	tmp = *stack;
 	while (tmp->content != min)
 	{
 		i++;
 		tmp = tmp->next;
 	}
-	if (i <= (stack_size(*a) / 2))
+	if (i <= (stack_size(*stack) / 2))
 	{
-		while ((*a)->content != stack_min((*a)))
-			rotate_a(a, true);
+		while ((*stack)->content != stack_min((*stack)))
+			rotate_a(stack, true);
 	}
 	else
 	{
-		while ((*a)->content != stack_min(*a))
-			reverse_rotate_a(a, true);
+		while ((*stack)->content != stack_min(*stack))
+			reverse_rotate_a(stack, true);
 	}
 }
 
@@ -63,7 +75,7 @@ void	find_random_and_move(t_stack **a, t_stack **b)
 	find_move_simple(a, tmp, move, value);
 }
 
-void	find_min_and_move(t_stack **a, t_stack **b)
+void	find_min_and_move(t_stack **a)
 {
 	t_stack	*tmp;
 	int		min;

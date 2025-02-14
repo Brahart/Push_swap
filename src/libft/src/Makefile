@@ -1,3 +1,11 @@
+BOLD_GREEN	=	\e[1;32m
+BOLD_RED	=	\e[1;31m
+BOLD_BLUE	=	\e[1;34m
+BOLD_YELLOW	=	\e[1;33m
+PURPLE		=	\e[1;35m
+BOLD_CYAN	=	\e[1;36m
+STOP_COLOR	=	\e[0m
+
 CC = cc
 
 CFLAGS = -Wall -Wextra -Werror

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algorithm.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abrahamsinsard <abrahamsinsard@student.    +#+  +:+       +#+        */
+/*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 18:26:53 by asinsard          #+#    #+#             */
-/*   Updated: 2025/02/12 15:11:11 by abrahamsins      ###   ########lyon.fr   */
+/*   Updated: 2025/02/14 01:46:06 by asinsard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@ void	sort_three(t_stack **stack)
 	{
 		rotate_a(stack, true);
 		if (stack_min((*stack)) == (*stack)->next->content)
-			swap_a(stack);
+			swap_a(stack, true);
 	}
 	else if (stack_min(*stack) == (*stack)->content)
 	{
-		swap_a(stack);
+		swap_a(stack, true);
 		rotate_a(stack, true);
 	}
 	else if (stack_min(*stack) == (*stack)->next->content)
-		swap_a(stack);
+		swap_a(stack, true);
 	else
 		reverse_rotate_a(stack, true);
 }
@@ -54,68 +54,60 @@ int	r_or_rr(int *cost_a, int *cost_b, t_stack *a, t_stack *b)
 	}
 	else if (*cost_b != 0 && *cost_b < len_b / 2)
 		sort_of += 7;
-	// ft_printf("sort_of == %d || len_a = %d | cost_a == %d || len_b = %d | cost_b == %d\n", sort_of, len_a, *cost_a, len_b, *cost_b);
 	return (sort_of);
 }
 
 void	sort_a(t_stack **a, t_stack **b)
 {
 	int	len_b;
-	int	min;
-	int	best;
 
 	len_b = stack_size(*b);
 	while (len_b > 0)
 	{
 		if (((*b)->content > stack_max(*a)) || ((*b)->content < stack_min(*a)))
-			find_min_and_move(a, b);
+			find_min_and_move(a);
 		else
 			find_random_and_move(a, b);
-		push_to_a(a, b);
+		push_to_a(a, b, true);
 		len_b--;
 	}
 	find_good_place(a);
 }
 
-void	sort_b(t_stack **a)
+void	sort_b(t_stack **a, t_stack **b)
 {
-	t_stack	*b;
-	int		len;
-	int		best;
-	int	len_a;
-	int	min;
+	int	len;
+	int	best;
 
-	b = NULL;
 	if ((stack_size(*a) > 3) && (!check_is_sorted((*a))))
-		push_to_b(a, &b);
+		push_to_b(a, b, true);
 	if ((stack_size(*a) > 3) && (!check_is_sorted((*a))))
-		push_to_b(a, &b);
+		push_to_b(a, b, true);
 	len = stack_size(*a);
 	while ((len > 3) && (!check_is_sorted((*a))))
 	{
-		alloc_step(a, &b);
+		alloc_step(a, b);
 		best = find_best_step(a);
-		find_move_together(a, &b, best);
+		find_move_together(a, b, best);
 		len--;
 	}
 	if (!check_is_sorted((*a)))
 		sort_three(a);
-	if (b != NULL)
-		sort_a(a, &b);
 }
 
-
-void	algo_sort(t_stack **stack_a)
+void	algo_sort(t_stack **a)
 {
 	int		len;
-	int		i;
+	t_stack	*b;
 
-	len = stack_size(*stack_a);
-	if (len == 2 && !check_is_sorted((*stack_a)))
-		swap_a(stack_a);
+	b = NULL;
+	len = stack_size(*a);
+	if (len == 2 && !check_is_sorted(*a))
+		swap_a(a, true);
+	else if (len == 3 && !check_is_sorted(*a))
+		sort_three(a);
 	else
-	{
-		sort_b(stack_a);
-		
-	}
+		sort_b(a, &b);
+	if (b != NULL)
+		sort_a(a, &b);
 }

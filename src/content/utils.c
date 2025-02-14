@@ -3,40 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abrahamsinsard <abrahamsinsard@student.    +#+  +:+       +#+        */
+/*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 14:57:57 by asinsard          #+#    #+#             */
-/*   Updated: 2025/02/12 15:17:36 by abrahamsins      ###   ########lyon.fr   */
+/*   Updated: 2025/02/14 02:50:23 by asinsard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
+#include "../libft/include/libft.h"
 
 void	ft_error(const char *str)
 {
-	write(2, "\e[1;31m%s\e[0m\n", ft_strlen(str));
-}
-
-char	**check_arg(char *str)
-{
-	int		i;
-	char	**array;
-
-	array = NULL;
-	i = 0;
-	while (str[i])
-	{
-		if ((str[i] == ' ') || (str[i] >= '0')
-			|| (str[i] <= '9'))
-			i++;
-		else
-			return (NULL);
-	}
-	i = 0;
-	array = ft_split(str, ' ');
-	if (!array)
-		return (NULL);
-	return (array);
+	write(2, str, ft_strlen(str));
 }
 
 void	free_split(char **split)
@@ -51,4 +30,36 @@ void	free_split(char **split)
 		i++;
 	}
 	free(split);
+}
+
+void	ft_free(int ac, t_stack *a, char **arg, bool flag)
+{
+	free_stack(a);
+	if (ac == 2)
+		free_split(arg);
+	if (flag == true)
+	{
+		ft_error("ERROR\n");
+		exit(EXIT_FAILURE);
+	}
+	exit(EXIT_SUCCESS);
+}
+
+void	check_error(char **arg, int ac, t_stack *a)
+{
+	if (!a && arg)
+	{
+		free_split(arg);
+		ft_error("ERROR\nProblem with allocation of stack");
+		exit (EXIT_FAILURE);
+	}
+	else if (!arg && ac == 2)
+	{
+		if (a)
+			free_stack(a);
+		ft_error("ERROR\nproblem with split");
+		exit(EXIT_FAILURE);
+	}
+	if (check_double(a))
+		ft_free(ac, a, arg, true);
 }

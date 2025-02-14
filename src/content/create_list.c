@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   create_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abrahamsinsard <abrahamsinsard@student.    +#+  +:+       +#+        */
+/*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 15:10:30 by asinsard          #+#    #+#             */
-/*   Updated: 2025/02/12 15:18:32 by abrahamsins      ###   ########lyon.fr   */
+/*   Updated: 2025/02/14 02:54:25 by asinsard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
+#include "../libft/include/ft_printf.h"
 
 t_stack	*add_new_node(int value)
 {
@@ -32,6 +33,11 @@ void	add_to_list(t_stack **head, int value)
 	t_stack	*tmp;
 
 	new_node = add_new_node(value);
+	if (!new_node)
+	{
+		ft_error("ERROR\nProblem with stack");
+		exit(0);
+	}
 	if ((*head) == NULL)
 	{
 		(*head) = new_node;
@@ -58,7 +64,7 @@ void	display_list(t_stack *head, const char *str)
 	if (!tmp)
 	{
 		ft_printf("ERROR\nliste : %s doesn't exist\n");
-		return ;		
+		return ;
 	}
 	ft_printf("\e[1;31mliste : %s\n\e[0m", str);
 	while (tmp->next != head)
@@ -73,7 +79,7 @@ void	display_list(t_stack *head, const char *str)
 	ft_printf("\e[1;34m [...]\n\e[0m");
 }
 
-void	free_list(t_stack *head)
+void	free_stack(t_stack *head)
 {
 	t_stack	*tmp;
 	t_stack	*next_node;
@@ -90,4 +96,26 @@ void	free_list(t_stack *head)
 		tmp = next_node;
 	}
 	free(tmp);
+}
+
+char	**create_stack(int ac, char **av, t_stack **a)
+{
+	int		i;
+	int		value;
+	char	**arg;
+
+	i = 1;
+	if (ac == 2)
+	{
+		arg = check_arg(av[1]);
+		av = arg;
+		i = 0;
+	}
+	while (av[i])
+	{
+		value = check_atol(av[i], *a, ac, av);
+		add_to_list(a, value);
+		i++;
+	}
+	return (arg);
 }

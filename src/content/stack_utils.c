@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abrahamsinsard <abrahamsinsard@student.    +#+  +:+       +#+        */
+/*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 17:40:25 by asinsard          #+#    #+#             */
-/*   Updated: 2025/02/12 15:19:13 by abrahamsins      ###   ########lyon.fr   */
+/*   Updated: 2025/02/13 20:50:13 by asinsard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,8 @@ int	stack_last(t_stack *stack)
 	t_stack	*tmp;
 
 	tmp = stack;
-	while(tmp->next != stack)
+	while (tmp->next != stack)
 		tmp = tmp->next;
 	i = tmp->content;
 	return (i);
 }
-

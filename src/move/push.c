@@ -6,60 +6,59 @@
 /*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:55:19 by asinsard          #+#    #+#             */
-/*   Updated: 2025/02/11 23:26:17 by asinsard         ###   ########lyon.fr   */
+/*   Updated: 2025/02/14 04:21:04 by asinsard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
+#include "../libft/include/ft_printf.h"
 
-void	push_to_a(t_stack **stack_a, t_stack **stack_b)
+void	push_to_a(t_stack **a, t_stack **b, bool flag)
 {
 	t_stack	*head;
 
-	if (!stack_b || !(*stack_b))
+	if (!b || !(*b))
 		return ;
-	head = (*stack_b);
-	// if ((*stack_b)->next == (*stack_b))
-	// 	(*stack_b) = NULL;
-	(*stack_b) = (*stack_b)->next;
-	(*stack_b)->prev = head->prev;
-	head->prev->next = (*stack_b);
-	if (!(*stack_a))
+	head = (*b);
+	(*b) = (*b)->next;
+	(*b)->prev = head->prev;
+	head->prev->next = (*b);
+	if (!(*a))
 	{
-		(*stack_a) = head;
+		(*a) = head;
 		head->next = head;
 		head->prev = head;
 	}
-	head->next = (*stack_a);
-	head->prev = (*stack_a)->prev;
-	(*stack_a)->prev->next = head;
-	(*stack_a)->prev = head;
-	(*stack_a) = head;
-	ft_printf("pa\n");
+	head->next = (*a);
+	head->prev = (*a)->prev;
+	(*a)->prev->next = head;
+	(*a)->prev = head;
+	(*a) = head;
+	if (flag == true)
+		ft_printf("pa\n");
 }
 
-void	push_to_b(t_stack **stack_a, t_stack **stack_b)
+void	push_to_b(t_stack **a, t_stack **b, bool flag)
 {
 	t_stack	*head;
 
-	if (!stack_a || !(*stack_a))
+	if (!a || !(*a))
 		return ;
-	head = (*stack_a);
-	// if ((*stack_a)->next == (*stack_a))
-	// 	(*stack_a) = NULL;
-	(*stack_a) = (*stack_a)->next;
-	(*stack_a)->prev = head->prev;
-	head->prev->next = (*stack_a);
-	if (!(*stack_b))
+	head = (*a);
+	(*a) = (*a)->next;
+	(*a)->prev = head->prev;
+	head->prev->next = (*a);
+	if (!(*b))
 	{
-		(*stack_b) = head;
+		(*b) = head;
 		head->next = head;
 		head->prev = head;
 	}
-	head->next = (*stack_b);
-	head->prev = (*stack_b)->prev;
-	(*stack_b)->prev->next = head;
-	(*stack_b)->prev = head;
-	(*stack_b) = head;
-	ft_printf("pb\n");
+	head->next = (*b);
+	head->prev = (*b)->prev;
+	(*b)->prev->next = head;
+	(*b)->prev = head;
+	(*b) = head;
+	if (flag == true)
+		ft_printf("pb\n");
 }

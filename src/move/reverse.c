@@ -6,11 +6,12 @@
 /*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:55:22 by asinsard          #+#    #+#             */
-/*   Updated: 2025/02/03 19:54:34 by asinsard         ###   ########lyon.fr   */
+/*   Updated: 2025/02/13 23:37:26 by asinsard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
+#include "../libft/include/ft_printf.h"
 
 void	reverse_rotate_a(t_stack **stack_a, bool flag)
 {
@@ -30,9 +31,10 @@ void	reverse_rotate_b(t_stack **stack_b, bool flag)
 		ft_printf("rrb\n");
 }
 
-void	reverse_rotate_rr(t_stack **stack_a, t_stack **stack_b)
+void	reverse_rotate_rr(t_stack **stack_a, t_stack **stack_b, bool flag)
 {
 	reverse_rotate_a(stack_a, false);
 	reverse_rotate_b(stack_b, false);
-	ft_printf("rrr\n");
+	if (flag == true)
+		ft_printf("rrr\n");
 }
