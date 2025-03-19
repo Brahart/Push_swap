@@ -6,7 +6,7 @@
 /*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 15:10:30 by asinsard          #+#    #+#             */
-/*   Updated: 2025/02/14 02:54:25 by asinsard         ###   ########lyon.fr   */
+/*   Updated: 2025/02/14 20:48:39 by asinsard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ char	**create_stack(int ac, char **av, t_stack **a)
 	char	**arg;
 
 	i = 1;
+	arg = NULL;
 	if (ac == 2)
 	{
 		arg = check_arg(av[1]);

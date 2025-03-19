@@ -6,13 +6,13 @@
 /*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 15:45:25 by asinsard          #+#    #+#             */
-/*   Updated: 2025/01/29 19:06:41 by asinsard         ###   ########lyon.fr   */
+/*   Updated: 2025/03/14 02:29:16 by asinsard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
 
-int	check_is_sorted(t_stack *stack)
+int	 check_is_sorted(t_stack *stack)
 {
 	t_stack	*tmp;
 

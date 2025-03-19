@@ -46,9 +46,9 @@ OBJ_BONUS	=	$(BONUS_FILE:.c=.o)
 
 all: $(NAME)
 
-%.o: $(SRC_DIR)%.c $(HEAD)
+%.o: %.c $(HEAD)
 	@echo "$(PURPLE)"
-	@$(CC) $(FLAGS) -c $< -o $@
+	$(CC) $(FLAGS) -c $< -o $@
 
 bonus: $(BONUS)
 
@@ -68,6 +68,8 @@ $(NAME): $(OBJ_1) $(OBJ_2)
 	$(CC) $(FLAGS) $(OBJ_1) $(OBJ_2) $(LIBFT_FLAGS) -o $(NAME)
 	@echo "$(BOLD_GREEN)SUCCESS !!!$(STOP_COLOR)"
 
+every: $(BONUS) $(NAME)
+
 clean:
 	@echo "$(BOLD_BLUE)Delete obj...$(STOP_COLOR)"
 	@make clean -sC $(LIBFT_DIR)
@@ -79,6 +81,6 @@ fclean: clean
 	@rm -f $(LIB_LIBFT) $(NAME) $(BONUS)
 	@echo "$(BOLD_RED)SUCCESS !!!$(STOP_COLOR)"
 
-re: fclean all
+re: fclean every  #all
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re bonus every

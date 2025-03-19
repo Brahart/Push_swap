@@ -6,7 +6,7 @@
 /*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 14:07:25 by asinsard          #+#    #+#             */
-/*   Updated: 2025/02/13 23:54:55 by asinsard         ###   ########lyon.fr   */
+/*   Updated: 2025/03/17 16:09:21 by asinsard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	main(int ac, char **av)
 		return (0);
 	}
 	arg = create_stack(ac, av, &a);
+	display_list(a, "a");
 	check_error(arg, ac, a);
 	if (check_double(a))
 		ft_free(ac, a, arg, true);

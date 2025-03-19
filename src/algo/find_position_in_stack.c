@@ -6,7 +6,7 @@
 /*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 02:53:27 by asinsard          #+#    #+#             */
-/*   Updated: 2025/02/13 23:10:10 by asinsard         ###   ########lyon.fr   */
+/*   Updated: 2025/02/14 22:39:27 by asinsard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,4 +103,30 @@ int	find_nbr_rotate(t_stack *stack, int value, bool flag)
 			i *= -1;
 	}
 	return (i);
+}
+
+int	r_or_rr(int *cost_a, int *cost_b, t_stack *a, t_stack *b)
+{
+	int	len_a;
+	int	len_b;
+	int	sort_of;
+
+	len_a = stack_size(a);
+	len_b = stack_size(b);
+	sort_of = 0;
+	if (*cost_a != 0 && *cost_a >= len_a / 2)
+	{
+		sort_of += 1;
+		*cost_a = len_a - *cost_a;
+	}
+	else if (*cost_a != 0 && *cost_a < len_a / 2)
+		sort_of += 3;
+	if (*cost_b != 0 && *cost_b >= len_b / 2)
+	{
+		sort_of += 5;
+		*cost_b = len_b - *cost_b;
+	}
+	else if (*cost_b != 0 && *cost_b < len_b / 2)
+		sort_of += 7;
+	return (sort_of);
 }

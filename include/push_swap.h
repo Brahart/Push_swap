@@ -6,7 +6,7 @@
 /*   By: asinsard <asinsard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:55:16 by asinsard          #+#    #+#             */
-/*   Updated: 2025/02/14 01:45:07 by asinsard         ###   ########lyon.fr   */
+/*   Updated: 2025/02/17 15:06:51 by asinsard         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,6 @@ typedef struct s_stack
 	struct s_stack	*next;
 	int				content;
 	int				step;
-	int				pos_in_b;
-	int				min;
-	int				max;
 }	t_stack;
 
 /* ---------------MOVE-------------- */
